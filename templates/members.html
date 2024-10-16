@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Members{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Add Member Form (left side) -->
+    <div class="col-md-3">
+        <h2>Add Member</h2>
+        <form method="POST" action="/members" class="add-form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="firstname" class="form-label">First Name:</label>
+                <input type="text" name="firstname" class="form-control" placeholder="First Name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="lastname" class="form-label">Last Name:</label>
+                <input type="text" name="lastname" class="form-control" placeholder="Last Name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" name="email" class="form-control" placeholder="Email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="profilepicture" class="form-label">Profile Picture:</label>
+                <input type="file" name="profilepicture" class="form-control" accept="image/*">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Member</button>
+        </form>
+    </div>
+
+    <!-- Member List and Search/Sort (right side) -->
+    <div class="col-md-9">
+        <h2>Members</h2>
+        <form method="GET" action="/members" class="row g-3 align-items-end mb-3">
+            <!-- Search Bar -->
+            <div class="col-md-4">
+                <label for="search" class="form-label">Search by name:</label>
+                <input type="text" id="search" name="search" class="form-control" placeholder="Enter name..." value="{{ search_query }}">
+            </div>
+    
+            <!-- Sort By Dropdown -->
+            <div class="col-md-3">
+                <label for="sortby" class="form-label">Sort by:</label>
+                <select name="sortby" id="sortby" class="form-select">
+                    <option value="lastname" {% if sort_by == 'lastname' %} selected {% endif %}>Last Name</option>
+                    <option value="firstname" {% if sort_by == 'firstname' %} selected {% endif %}>First Name</option>
+                    <option value="joindate" {% if sort_by == 'joindate' %} selected {% endif %}>Join Date</option>
+                </select>
+            </div>
+    
+            <!-- Order Dropdown -->
+            <div class="col-md-3">
+                <label for="order" class="form-label">Order:</label>
+                <select name="order" id="order" class="form-select">
+                    <option value="asc" {% if sort_order == 'asc' %} selected {% endif %}>Ascending</option>
+                    <option value="desc" {% if sort_order == 'desc' %} selected {% endif %}>Descending</option>
+                </select>
+            </div>
+    
+            <!-- Submit Button -->
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-secondary">Sort</button>
+            </div>
+        </form>
+    
+        <!-- Members List -->
+        <div class="row">
+            {% for member in members %}
+            <div class="col-md-6 mb-3">
+                <div class="d-flex align-items-start">
+                    <!-- Profile Picture Column -->
+                    <img src="{{ url_for('static', filename=member.profilepicture) }}" 
+                        alt="Profile picture of {{ member.firstname }}" 
+                        class="me-3 rounded-circle" width="80" height="80">
+                    <div>
+                        <strong>{{ member.firstname }} {{ member.lastname }}</strong><br>
+                        Joined: {{ member.joindate }}<br>
+                        Email: {{ member.email }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+{% endblock %}

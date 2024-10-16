@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Books{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Add Book Form (left side) -->
+    <div class="col-md-3">
+        <h2>Add a New Book</h2>
+        <form action="/books" method="POST" enctype="multipart/form-data" class="add-form">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" id="title" name="title" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="author" class="form-label">Author:</label>
+                <input type="text" id="author" name="author" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="genre" class="form-label">Genre:</label>
+                <select id="genre" name="genre" class="form-select" required>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-fiction">Non-fiction</option>
+                    <!-- more genres -->
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="publicationyear" class="form-label">Publication Year:</label>
+                <select id="publicationyear" name="publicationyear" class="form-select" required>
+                    {% for year in range(1974, current_year + 1) %}
+                        <option value="{{ year }}">{{ year }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Book Cover Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Book</button>
+        </form>
+    </div>
+    
+    <div class="col-md-9">
+        
+        
+        <!-- Add a row to contain the two forms side by side -->
+        <div class="row">
+            <h2>Book List</h2>
+            <!-- Search Form -->
+            <div class="col-md-6">
+                <label class="form-label">Search by title:</label>
+                <form id="search-form" class="mb-3">
+                    <input type="text" id="search-bar" class="form-control" placeholder="Search for books...">
+                </form>
+            </div>
+    
+            <!-- Sort Form -->
+            <div class="col-md-6">
+                <form method="GET" action="/books" class="mb-3 d-flex">
+                    <div class="me-2">
+                        <label for="sortby" class="form-label">Sort by:</label>
+                        <select name="sortby" id="sortby" class="form-select">
+                            <option value="title">Title</option>
+                            <!-- other options -->
+                        </select>
+                    </div>
+    
+                    <div class="me-2">
+                        <label for="order" class="form-label">Order:</label>
+                        <select name="order" id="order" class="form-select">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </div>
+    
+                    <button type="submit" class="btn btn-secondary align-self-end">Sort</button>
+                </form>
+            </div>
+        </div>
+    
+        <div class="scroll-container" id="scroll-container">
+        <ul>
+            {% for book in books %}
+            <li>
+                <img src="{{ url_for('static', filename=book.imagepath) }}" alt="Cover image of {{ book.title }}"><br>
+                <strong>{{ book.title }}</strong><br>
+                by {{ book.author }}<br>
+                ({{ book.genre }}, {{ book.publicationyear }})
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Borrow Books{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Borrow Book Form (left side) -->
+    <div class="col-md-3">
+        <h2>Borrow a Book</h2>
+        <form method="POST" action="/borrowing" class="add-form">
+            <div class="mb-3">
+                <label for="memberid" class="form-label">Member:</label>
+                <select name="memberid" id="memberid" class="form-select" required>
+                    {% for member in members %}
+                    <option value="{{ member.memberid }}">{{ member.firstname }} {{ member.lastname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="bookid" class="form-label">Book:</label>
+                <select name="bookid" id="bookid" class="form-select" required>
+                    {% for book in books %}
+                    <option value="{{ book.bookid }}">{{ book.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Borrow Book</button>
+        </form>
+    </div>
+    
+    <!-- Borrowing List (right side) -->
+    <div class="col-md-9">
+        <h2>Borrowing History</h2>
+        <div>
+            <!-- Combined form with search, sort by, and order inputs in a single row -->
+            <form method="GET" action="/borrowing" class="row g-3 align-items-end">
+                <!-- Search Bar -->
+                <div class="col-md-4">
+                    <label class="form-label" for="search-bar">Search by title:</label>
+                    <input type="text" id="search-bar" name="search" class="form-control" placeholder="Search for books...">
+                </div>
+    
+                <!-- Sort By Dropdown -->
+                <div class="col-md-3">
+                    <label for="sortby" class="form-label">Sort by:</label>
+                    <select name="sortby" id="sortby" class="form-select">
+                        <option value="borrowdate" {% if sort_by == 'borrowdate' %} selected {% endif %}>Borrow Date</option>
+                        <option value="duedate" {% if sort_by == 'duedate' %} selected {% endif %}>Due Date</option>
+                        <option value="returndate" {% if sort_by == 'returndate' %} selected {% endif %}>Return Date</option>
+                    </select>
+                </div>
+    
+                <!-- Order Dropdown -->
+                <div class="col-md-3">
+                    <label for="order" class="form-label">Order:</label>
+                    <select name="order" id="order" class="form-select">
+                        <option value="asc" {% if sort_order == 'asc' %} selected {% endif %}>Ascending</option>
+                        <option value="desc" {% if sort_order == 'desc' %} selected {% endif %}>Descending</option>
+                    </select>
+                </div>
+    
+                <!-- Submit Button -->
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-secondary">Sort</button>
+                </div>
+            </form>
+        </div>
+        <br><br>
+        <ul class="list-group">
+            {% for record in borrowing_records %}
+            <li class="list-group-item {% if record.duedate < datetime.now().date() %} list-group-item-danger {% endif %}">
+                <strong>{{ record.title }}</strong> borrowed by {{ record.firstname }} {{ record.lastname }}<br>
+                Borrowed on: {{ record.borrowdate }} | Due on: {{ record.duedate }}
+                {% if record.returndate %}
+                    | Returned on: {{ record.returndate }}
+                {% else %}
+                    <form method="POST" action="/return_book/{{ record.borrowid }}" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-warning">Return Book</button>
+                    </form>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation" class="mt-3">
+            <ul class="pagination">
+                {% if page > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page - 1 }}&sortby={{ sort_by }}&order={{ sort_order }}">Previous</a>
+                </li>
+                {% endif %}
+                
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link" href="?page={{ p }}&sortby={{ sort_by }}&order={{ sort_order }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+                
+                {% if page < total_pages %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page + 1 }}&sortby={{ sort_by }}&order={{ sort_order }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

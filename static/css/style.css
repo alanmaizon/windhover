@@ -1,0 +1,190 @@
+@font-face {
+    font-family: 'CustomFont'; /* Name your font family */
+    src: url('kells.ttf'); /* Locate the .ttf file within your directory*/
+}
+
+:root {
+    --blue: #6495ed;
+    --white: #ffffff;
+    --black: #000000;
+    --grey: #232130;
+    --paragraph-font-family: 'CustomFont', sans-serif;
+}
+
+/* Default light mode */
+body {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+h1 {
+    font-family: var(--paragraph-font-family);
+    text-align: center;
+    font-size: 2.6em;
+}
+
+/* Dark mode */
+body.dark-mode {
+    background-color: var(--grey);
+    color: var(--white);
+}
+
+nav {
+    margin: 0 0 20px 0;
+}
+
+.navbar .nav-link:hover {
+    color: var(--blue);
+}
+
+.book-list {
+    flex: 2;
+    overflow-x: auto;  /* Enable horizontal scrolling */
+}
+
+.header-bg {
+    background-image: url('/static/images/hero.gif'); /* Path to your image */
+    background-size: cover; /* Ensure the image covers the entire header */
+    background-attachment: fixed; /* Keep the background fixed when scrolling */
+    border-radius: 15px;
+}
+
+header h1, header p {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 1), -1px -1px 2px rgba(255, 255, 255, 1);
+}
+.scroll-container {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;  /* Enable smooth scrolling */
+}
+
+.scroll-container ul {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.scroll-container li {
+    margin-right: 20px;
+}
+
+.scroll-container img {
+
+    padding: 0 20px 0 0;
+    display: block;
+    width: 150px;
+    height: 200px;
+    margin-top: 5px;
+    user-drag: none;  /* Prevent images from being dragged */
+    pointer-events: none;  /* Disable pointer events to avoid dragging */
+    
+}
+
+.scroll-container {
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;  /* Enable smooth scrolling */
+}
+
+/*Dark Mode settings/*
+
+
+/* Dark Mode Toggle Button Styles */
+.dark-mode-toggle {
+    cursor: pointer;
+    display: inline-block;
+    background: none;
+    border: none;
+    position: relative;
+    width: 40px;
+    height: 24px;
+    padding: 0;
+    border-radius: 12px;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+}
+
+.dark-mode-toggle .toggle {
+    display: inline-block;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--white);
+    transition: transform 0.3s;
+}
+
+body.dark-mode .dark-mode-toggle {
+    background-color: #666;
+}
+
+body.dark-mode .dark-mode-toggle .toggle {
+    transform: translateX(16px);
+}
+
+/* Default light mode navbar */
+.navbar {
+    background-color: var(--white);
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand h1 {
+    color: #000;
+}
+
+/* Dark mode styling for navbar */
+.dark-mode .navbar {
+    background-color: var(--grey);  /* Change navbar background in dark mode */
+}
+
+.dark-mode .navbar .nav-link,
+.dark-mode .navbar .navbar-brand h1 {
+    color: var(--white);  /* Change the text color in dark mode */
+}
+
+/* Dark mode styles for the navbar-toggler border */
+.dark-mode .navbar-toggler {
+    border-color: white; /* Change the border color to white in dark mode */
+}
+
+/* Dark mode styles for the navbar-toggler-icon */
+.dark-mode .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+
+/* Dark mode navbar link hover */
+.dark-mode .navbar .nav-link:hover {
+    color: var(--blue);  /* Change color to gold when hovering over a nav link in dark mode */
+}
+
+/* Mobile view */
+@media only screen and (max-width: 768px) {
+    .container-book {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .book-list, .add-form {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    table {
+        width: 100%;
+    }
+
+    .sticky-header {
+        position: sticky;
+        top: 0;
+        background-color: var(--white);
+    }
+}

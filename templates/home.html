@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <!-- Hero Section -->
+    <header class="bg-primary text-white text-center py-5 header-bg">
+        <div class="container">
+            <h1>Welcome to the Windhover</h1>
+            <p class="lead">Find your favorite books, join our lecture club, and more!</p>
+            <a href="{{ url_for('books') }}" class="btn btn-light btn-lg mt-3">Explore Now</a>
+        </div>
+    </header>
+    
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Books</h2>
+                <p>Explore our wide collection of books available for borrowing. Search by title and author.</p>
+                <a href="{{ url_for('books') }}" class="btn btn-primary">View Books</a><br><br>
+            </div>
+            <div class="col-lg-4">
+                <h2>Members</h2>
+                <p>Manage your library membership, add new members and access your borrowing history.</p>
+                <a href="{{ url_for('members_page') }}" class="btn btn-primary">View Members</a><br><br>
+            </div>
+            <div class="col-lg-4">
+                <h2>Borrowing</h2>
+                <p>Track your borrowed books and check their due dates. Check available books to borrow.</p>
+                <a href="{{ url_for('manage_borrowing') }}" class="btn btn-primary">View Borrowing History</a><br><br>
+            </div>
+        </div>
+    </div>
+<div>
+{% endblock %}
