@@ -21,6 +21,38 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Fetch GitHub token from environment variables
+GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')  # This will pull the token set in Render.com
+GITHUB_REPO = 'alanmaizon/windhover'
+GITHUB_BRANCH = 'main'
+UPLOAD_DIR = 'static/images/profile_pics'
+
+# Function to upload file to GitHub
+def upload_file_to_github(filepath, filename):
+    with open(filepath, "rb") as file:
+        content = file.read()
+        base64_content = content.encode("base64")
+    
+    url = f'https://api.github.com/repos/{GITHUB_REPO}/contents/{UPLOAD_DIR}/{filename}'
+    
+    headers = {
+        "Authorization": f"token {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+    
+    data = {
+        "message": f"Upload {filename}",
+        "content": base64_content,
+        "branch": GITHUB_BRANCH
+    }
+    
+    response = requests.put(url, json=data, headers=headers)
+    
+    if response.status_code == 201:
+        print(f"File {filename} uploaded successfully!")
+    else:
+        print(f"Failed to upload {filename}. Error: {response.json()}")
+
 # Retrieve the Internal Database URL from environment variables
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
@@ -112,15 +144,22 @@ def members_page():
         joindate = datetime.now().date()
 
         # Handle the image file upload
-        file = request.files['profilepicture']
-        if file and allowed_file(file.filename):
+        file = request.files['profile_picture']
+        if file:
             filename = secure_filename(file.filename)
-            # Save file to 'static/images/profile_pics'
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'profile_pics', filename))
-            # Store path without the 'static/' part
-            img_path = os.path.join('images/profile_pics', filename).replace("\\", "/")
-        else:
-            img_path = None
+            temp_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            
+            # Save the file locally first
+            file.save(temp_path)
+            
+            # Upload the file to GitHub
+            upload_file_to_github(temp_path, filename)
+            
+            # Delete the temporary file after uploading
+            os.remove(temp_path)
+            
+            flash(f"Profile picture {filename} uploaded to GitHub successfully!", "success")
+        
 
         # Insert new member
         cursor.execute('''
