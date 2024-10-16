@@ -11,7 +11,6 @@ Welcome to the **Windhover Library Management System**, a web application where 
 - [Setup](#setup)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
-- [License](#license)
 
 ## Features
 
