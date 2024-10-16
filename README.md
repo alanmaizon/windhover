@@ -118,9 +118,3 @@ def get_db_connection():
 ![Members List](static/images/screenshots/members.png)
 
 ![Borrowing History](static/images/screenshots/borrowing.png)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
-
