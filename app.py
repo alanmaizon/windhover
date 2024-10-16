@@ -37,10 +37,6 @@ def get_db_connection():
         port=result.port
     )
 
-# Function to connect to the database
-def get_db_connection():
-    return conn
-
 @app.route('/')
 def home():
     return render_template('home.html')
