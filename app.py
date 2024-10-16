@@ -24,7 +24,7 @@ def allowed_file(filename):
 DATABASE_URL = os.getenv("postgresql://admin:2Pc0yUyetQ57cw99X72Enlrwea7vxJi2@dpg-cs7f275umphs73a5fng0-a/library_db_dr9p")
 
 # Parse the URL
-result = urlparse(postgresql://admin:2Pc0yUyetQ57cw99X72Enlrwea7vxJi2@dpg-cs7f275umphs73a5fng0-a/library_db_dr9p)
+result = urlparse("postgresql://admin:2Pc0yUyetQ57cw99X72Enlrwea7vxJi2@dpg-cs7f275umphs73a5fng0-a/library_db_dr9p")
 
 # Connect using psycopg2
 conn = psycopg2.connect(
