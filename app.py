@@ -24,13 +24,13 @@ def allowed_file(filename):
 DATABASE_URL = os.getenv("DATABASE_URL")
 result = urlparse(DATABASE_URL)
 
-# Connect using psycopg2
+# Correctly access the URL components
 conn = psycopg2.connect(
-    dbname=result.path[1:],  # Removes leading "/"
-    user=result.admin,
-    password=result.2Pc0yUyetQ57cw99X72Enlrwea7vxJi2,
-    host=result.dpg-cs7f275umphs73a5fng0-a,
-    port=result.5432
+    dbname=result.path[1:],
+    user=result.username,
+    password=result.password,
+    host=result.hostname,
+    port=result.port
 )
 # Function to connect to the database
 def get_db_connection():
