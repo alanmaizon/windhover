@@ -113,4 +113,4 @@ def get_db_connection():
 
 ## Screenshots
 
-![Borrowing History](static/images/screenshots/homepage.png)
+![Home](static/images/screenshots/home.png)
