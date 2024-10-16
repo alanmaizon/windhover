@@ -144,22 +144,31 @@ def members_page():
         joindate = datetime.now().date()
 
         # Handle the image file upload
+        if 'profile_picture' not in request.files:
+            flash('No file part', 'error')
+            return redirect(request.url)
+
         file = request.files['profile_picture']
+
+        if file.filename == '':
+            flash('No selected file', 'error')
+            return redirect(request.url)
+
         if file:
             filename = secure_filename(file.filename)
             temp_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            
+
             # Save the file locally first
             file.save(temp_path)
-            
-            # Upload the file to GitHub
+
+            # Upload the file to GitHub (or process it however needed)
             upload_file_to_github(temp_path, filename)
-            
-            # Delete the temporary file after uploading
+
+            # Remove the local file after uploading
             os.remove(temp_path)
-            
-            flash(f"Profile picture {filename} uploaded to GitHub successfully!", "success")
-        
+
+            flash('File uploaded successfully!', 'success')
+            return redirect('/members')
 
         # Insert new member
         cursor.execute('''
