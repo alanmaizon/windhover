@@ -113,8 +113,6 @@ def get_db_connection():
 
 ## Screenshots
 
-![Homepage Screenshot](static/images/screenshots/homepage.png)
-
 ![Members List](static/images/screenshots/members.png)
 
 ![Borrowing History](static/images/screenshots/borrowing.png)
