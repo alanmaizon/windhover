@@ -20,14 +20,22 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Retrieve the Internal Database URL from environment variables
+DATABASE_URL = os.getenv("postgresql://admin:2Pc0yUyetQ57cw99X72Enlrwea7vxJi2@dpg-cs7f275umphs73a5fng0-a/library_db_dr9p")
+
+# Parse the URL
+result = urlparse(postgresql://admin:2Pc0yUyetQ57cw99X72Enlrwea7vxJi2@dpg-cs7f275umphs73a5fng0-a/library_db_dr9p)
+
+# Connect using psycopg2
+conn = psycopg2.connect(
+    dbname=result.path[1:],  # Removes leading "/"
+    user=result.admin,
+    password=result.2Pc0yUyetQ57cw99X72Enlrwea7vxJi2,
+    host=result.dpg-cs7f275umphs73a5fng0-a,
+    port=result.5432
+)
 # Function to connect to the database
 def get_db_connection():
-    conn = psycopg2.connect(
-        host='localhost',  # Database host
-        database='library_db',  # Database name (the one you restored)
-        user='postgres',  # Your PostgreSQL username
-        password='14121412'  # Your PostgreSQL password
-    )
     return conn
 
 @app.route('/')
