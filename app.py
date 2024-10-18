@@ -4,15 +4,9 @@ import psycopg2.extras
 import os
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
-from urllib.parse import urlparse
 import math 
 
 app = Flask(__name__)
-
-# Load configuration from environment variables
-app.secret_key = os.getenv('SECRET_KEY', 'your_fallback_secret_key')
-app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER', 'static/images')
-app.config['MAX_CONTENT_LENGTH'] = int(os.getenv('MAX_CONTENT_LENGTH', 16 * 1024 * 1024))  # 16MB limit by default
 
 # Allowed file extensions
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -21,22 +15,24 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# Retrieve the Internal Database URL from environment variables
-DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    raise ValueError("No DATABASE_URL set for the Flask application")
 
-result = urlparse(DATABASE_URL)
+# Access environment variables
+DB_HOST = os.getenv('RDS_HOST')
+DB_NAME = os.getenv('RDS_DB_NAME')
+DB_USER = os.getenv('RDS_USERNAME')
+DB_PASSWORD = os.getenv('RDS_PASSWORD')
+app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER', 'static/images')
+app.config['MAX_CONTENT_LENGTH'] = int(os.getenv('MAX_CONTENT_LENGTH', 16 * 1024 * 1024))  # 16MB limit by default
 
-# Function to connect to the database
+# Function to connect to the database using env variables
 def get_db_connection():
-    return psycopg2.connect(
-        dbname=result.path[1:],
-        user=result.username,
-        password=result.password,
-        host=result.hostname,
-        port=result.port
+    conn = psycopg2.connect(
+        host=DB_HOST,
+        database=DB_NAME,
+        user=DB_USER,
+        password=DB_PASSWORD
     )
+    return conn
 
 @app.route('/')
 def home():
