@@ -71,7 +71,7 @@
         <ul class="list-group">
             {% for record in borrowing_records %}
             <li class="list-group-item {% if record.duedate < datetime.now().date() %} list-group-item-danger {% endif %}">
-                <strong>{{ record.title }}</strong> borrowed by {{ record.firstname }} {{ record.lastname }}<br>
+                <strong>{{ record.book.title }}</strong> borrowed by {{ record.member.firstname }} {{ record.member.lastname }}<br>
                 Borrowed on: {{ record.borrowdate }} | Due on: {{ record.duedate }}
                 {% if record.returndate %}
                     | Returned on: {{ record.returndate }}
