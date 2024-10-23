@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 import os
-import math
 
 app = Flask(__name__)
 
@@ -29,7 +28,7 @@ def allowed_file(filename):
 # Models
 class Book(db.Model):
     __tablename__ = 'books'
-    bookid = db.Column(db.Integer, primary_key=True)
+    bookid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(255), nullable=False)
     author = db.Column(db.String(255), nullable=False)
     genre = db.Column(db.String(255), nullable=False)
@@ -39,7 +38,7 @@ class Book(db.Model):
 
 class Member(db.Model):
     __tablename__ = 'members'
-    memberid = db.Column(db.Integer, primary_key=True)
+    memberid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     firstname = db.Column(db.String(255), nullable=False)
     lastname = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
@@ -48,7 +47,7 @@ class Member(db.Model):
 
 class Borrowing(db.Model):
     __tablename__ = 'borrowing'
-    borrowid = db.Column(db.Integer, primary_key=True)
+    borrowid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     memberid = db.Column(db.Integer, db.ForeignKey('members.memberid'), nullable=False)
     bookid = db.Column(db.Integer, db.ForeignKey('books.bookid'), nullable=False)
     borrowdate = db.Column(db.Date, nullable=False)
