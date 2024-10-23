@@ -180,7 +180,8 @@ def manage_borrowing():
         sort_by=sort_by,
         sort_order=sort_order,
         page=page,
-        total_pages=borrowing_records.pages  # Use pagination attribute for total pages
+        total_pages=borrowing_records.pages,  # Use pagination attribute for total pages
+        datetime=datetime  # Pass the datetime object to the template context
     )
 
 @app.route('/return_book/<int:borrowid>', methods=['POST'])
