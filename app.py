@@ -166,13 +166,22 @@ def manage_borrowing():
     sort_by = request.args.get('sortby', 'borrowdate')
     sort_order = request.args.get('order', 'desc')
 
-    borrowing_records = Borrowing.query.order_by(db.text(f'{sort_by} {sort_order}')).paginate(page, per_page, False)
+    borrowing_records = Borrowing.query.order_by(db.text(f'{sort_by} {sort_order}')).paginate(page=page, per_page=per_page, error_out=False)
 
     # Fetch members and available books
     members = Member.query.all()
     books = Book.query.filter_by(available=True).all()
 
-    return render_template('borrow.html', borrowing_records=borrowing_records.items, members=members, books=books, sort_by=sort_by, sort_order=sort_order, page=page)
+    return render_template(
+        'borrow.html',
+        borrowing_records=borrowing_records.items,  # Use .items for paginated results
+        members=members,
+        books=books,
+        sort_by=sort_by,
+        sort_order=sort_order,
+        page=page,
+        total_pages=borrowing_records.pages  # Use pagination attribute for total pages
+    )
 
 @app.route('/return_book/<int:borrowid>', methods=['POST'])
 def return_book(borrowid):
