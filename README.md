@@ -27,6 +27,7 @@ Welcome to the **Windhover Library Management System**, a web application where 
 - **HTML/CSS/JavaScript**: Frontend of the app
 - **Bootstrap**: Styling framework for responsive design
 - **Psycopg2**: PostgreSQL database adapter for Python
+- **SQLAlchemy**: ORM that provides more security and abstraction
 - **Werkzeug**: Utility library used for secure file handling
 
 ## Setup
@@ -37,60 +38,6 @@ Ensure you have the following installed:
 
 - **Python 3.7+**
 - **PostgreSQL**
-
-### Installation
-
-1. Clone this repository:
-
-   ```bash
-   git clone https://github.com/alanmaizon/windhover.git
-   cd windhover
-   ```
-
-2. Install the required dependencies:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Set up the PostgreSQL database:
-
-   - Create a database named `library_db`.
-   - Restore the database schema from the provided `.sql` file.
-   
-   ```bash
-   psql -U postgres -d library_db -f schema.sql
-   ```
-
-4. Set environment variables for the app (optional):
-
-   ```bash
-   export FLASK_APP=app.py
-   export FLASK_ENV=development
-   ```
-
-5. Run the app:
-
-   ```bash
-   flask run
-   ```
-
-6. Visit the app in your browser at `http://127.0.0.1:5000`.
-
-### Configuration
-
-Modify `app.py` to set your PostgreSQL connection details:
-
-```python
-def get_db_connection():
-    conn = psycopg2.connect(
-        host='localhost',
-        database='library_db',
-        user='your_postgres_username',
-        password='your_postgres_password'
-    )
-    return conn
-```
 
 ## Usage
 
