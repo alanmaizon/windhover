@@ -32,60 +32,84 @@
         </form>
     </div>
 
-    <!-- Member List and Search/Sort (right side) -->
-    <div class="col-md-9">
-        <h2>Members</h2>
-        <form method="GET" action="/members" class="row g-3 align-items-end mb-3">
-            <!-- Search Bar -->
-            <div class="col-md-4">
-                <label for="search" class="form-label">Search by name:</label>
-                <input type="text" id="search" name="search" class="form-control" placeholder="Enter name..." value="{{ search_query }}">
-            </div>
-    
-            <!-- Sort By Dropdown -->
-            <div class="col-md-3">
-                <label for="sortby" class="form-label">Sort by:</label>
-                <select name="sortby" id="sortby" class="form-select">
-                    <option value="lastname" {% if sort_by == 'lastname' %} selected {% endif %}>Last Name</option>
-                    <option value="firstname" {% if sort_by == 'firstname' %} selected {% endif %}>First Name</option>
-                    <option value="joindate" {% if sort_by == 'joindate' %} selected {% endif %}>Join Date</option>
-                </select>
-            </div>
-    
-            <!-- Order Dropdown -->
-            <div class="col-md-3">
-                <label for="order" class="form-label">Order:</label>
-                <select name="order" id="order" class="form-select">
-                    <option value="asc" {% if sort_order == 'asc' %} selected {% endif %}>Ascending</option>
-                    <option value="desc" {% if sort_order == 'desc' %} selected {% endif %}>Descending</option>
-                </select>
-            </div>
-    
-            <!-- Submit Button -->
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-secondary">Sort</button>
-            </div>
-        </form>
-    
-        <!-- Members List -->
-        <div class="row">
-            {% for member in members %}
-            <div class="col-md-6 mb-3">
-                <div class="d-flex align-items-start">
-                    <!-- Profile Picture Column -->
-                    <img src="{{ url_for('static', filename=member.profilepicture) }}" 
-                        alt="Profile picture of {{ member.firstname }}" 
-                        class="me-3 rounded-circle" width="80" height="80">
-                    <div>
-                        <strong>{{ member.firstname }} {{ member.lastname }}</strong><br>
-                        Joined: {{ member.joindate }}<br>
-                        Email: {{ member.email }}
-                    </div>
+<!-- Member List and Search/Sort (right side) -->
+<div class="col-md-9">
+    <h2>Members</h2>
+    <form method="GET" action="/members" class="row g-3 align-items-end mb-3">
+        <!-- Search Bar -->
+        <div class="col-md-4">
+            <label for="search" class="form-label">Search by name:</label>
+            <input type="text" id="search" name="search" class="form-control" placeholder="Enter name..." value="{{ search_query }}">
+        </div>
+
+        <!-- Sort By Dropdown -->
+        <div class="col-md-3">
+            <label for="sortby" class="form-label">Sort by:</label>
+            <select name="sortby" id="sortby" class="form-select">
+                <option value="lastname" {% if sort_by == 'lastname' %} selected {% endif %}>Last Name</option>
+                <option value="firstname" {% if sort_by == 'firstname' %} selected {% endif %}>First Name</option>
+                <option value="joindate" {% if sort_by == 'joindate' %} selected {% endif %}>Join Date</option>
+            </select>
+        </div>
+
+        <!-- Order Dropdown -->
+        <div class="col-md-3">
+            <label for="order" class="form-label">Order:</label>
+            <select name="order" id="order" class="form-select">
+                <option value="asc" {% if sort_order == 'asc' %} selected {% endif %}>Ascending</option>
+                <option value="desc" {% if sort_order == 'desc' %} selected {% endif %}>Descending</option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-secondary">Sort</button>
+        </div>
+    </form>
+    <br>
+    <!-- Members List -->
+    <div class="row">
+        {% for member in members %}
+        <div class="col-md-6 mb-3">
+            <div class="d-flex align-items-start">
+                <!-- Profile Picture Column -->
+                <img src="{{ url_for('static', filename=member.profilepicture) }}" 
+                    alt="Profile picture of {{ member.firstname }}" 
+                    class="me-3 rounded-circle" width="80" height="80">
+                <div>
+                    <strong>{{ member.firstname }} {{ member.lastname }}</strong><br>
+                    Joined: {{ member.joindate }}<br>
+                    Email: {{ member.email }}
                 </div>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
-    
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation" class="mt-3">
+        <ul class="pagination">
+            {% if page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page - 1 }}&sortby={{ sort_by }}&order={{ sort_order }}&search={{ search_query }}">Previous</a>
+            </li>
+            {% endif %}
+            
+            {% for p in range(1, total_pages + 1) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+                <a class="page-link" href="?page={{ p }}&sortby={{ sort_by }}&order={{ sort_order }}&search={{ search_query }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+            
+            {% if page < total_pages %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page + 1 }}&sortby={{ sort_by }}&order={{ sort_order }}&search={{ search_query }}">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+
     
 {% endblock %}

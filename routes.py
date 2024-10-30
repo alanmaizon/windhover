@@ -72,13 +72,26 @@ def members_page():
     sort_by = request.args.get('sortby', 'lastname')
     sort_order = request.args.get('order', 'asc')
     search_query = request.args.get('search', '')
+    page = request.args.get('page', 1, type=int)
+    per_page = 6
 
-    members = Member.query.filter(
+    # Modify the members query with search, sort, and pagination
+    members_query = Member.query.filter(
         (Member.firstname.ilike(f'%{search_query}%')) | 
         (Member.lastname.ilike(f'%{search_query}%'))
-    ).order_by(db.text(f'{sort_by} {sort_order}')).all()
+    ).order_by(db.text(f'{sort_by} {sort_order}'))
 
-    return render_template('members.html', members=members, sort_by=sort_by, sort_order=sort_order, search_query=search_query)
+    members_pagination = members_query.paginate(page=page, per_page=per_page, error_out=False)
+
+    return render_template(
+        'members.html',
+        members=members_pagination.items,
+        sort_by=sort_by,
+        sort_order=sort_order,
+        search_query=search_query,
+        page=page,
+        total_pages=members_pagination.pages
+    )
 
 @app.route('/borrowing', methods=['GET', 'POST'])
 def manage_borrowing():
@@ -86,26 +99,37 @@ def manage_borrowing():
         member_id = request.form['memberid']
         book_id = request.form['bookid']
 
+        # Check if book is available
         book = Book.query.filter_by(bookid=book_id).first()
         if book and book.available:
             borrow_date = datetime.now().date()
             due_date = borrow_date + timedelta(days=30)
 
+            # Create a new borrowing record
             borrowing = Borrowing(memberid=member_id, bookid=book_id, borrowdate=borrow_date, duedate=due_date)
-            book.available = False
+            book.available = False  # Mark the book as unavailable
             db.session.add(borrowing)
             db.session.commit()
             flash('Book borrowed successfully!')
         else:
             flash('This book is not available for borrowing.', 'error')
 
+    # Get query parameters
     page = request.args.get('page', 1, type=int)
     per_page = 5
     sort_by = request.args.get('sortby', 'borrowdate')
     sort_order = request.args.get('order', 'desc')
+    search_query = request.args.get('search', '').strip()  # Get search query
 
-    borrowing_records = Borrowing.query.order_by(db.text(f'{sort_by} {sort_order}')).paginate(page=page, per_page=per_page, error_out=False)
+    # Apply filters
+    borrowing_records_query = Borrowing.query.join(Book).filter(
+        (Book.title.ilike(f'%{search_query}%')) | (search_query == '')
+    ).order_by(db.text(f'{sort_by} {sort_order}'))
 
+    # Paginate the results
+    borrowing_records = borrowing_records_query.paginate(page=page, per_page=per_page, error_out=False)
+
+    # Fetch members and available books
     members = Member.query.all()
     books = Book.query.filter_by(available=True).all()
 
@@ -118,8 +142,10 @@ def manage_borrowing():
         sort_order=sort_order,
         page=page,
         total_pages=borrowing_records.pages,
-        datetime=datetime
+        datetime=datetime,
+        search_query=search_query  # Pass search query to the template
     )
+
 
 @app.route('/return_book/<int:borrowid>', methods=['POST'])
 def return_book(borrowid):
