@@ -83,3 +83,51 @@ document.addEventListener('DOMContentLoaded', function () {
         scrollContainer.scrollLeft -= 300;
     });
 });
+
+
+function filterDropdown(inputId, optionClass) {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById(inputId);
+    filter = input.value.toUpperCase();
+    div = input.closest('.dropdown');
+    a = div.getElementsByClassName(optionClass);
+    for (i = 0; i < a.length; i++) {
+        txtValue = a[i].textContent || a[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // For Member dropdown
+    document.querySelectorAll('.member-option').forEach(item => {
+        item.addEventListener('click', event => {
+            event.preventDefault();
+            document.getElementById('memberDropdown').textContent = item.textContent;
+            document.getElementById('selectedMemberId').value = item.getAttribute('data-value');
+            console.log('Selected Member ID:', document.getElementById('selectedMemberId').value);  // Add this line
+        });
+    });
+
+    // For Book dropdown
+    document.querySelectorAll('.book-option').forEach(item => {
+        item.addEventListener('click', event => {
+            event.preventDefault();
+            document.getElementById('bookDropdown').textContent = item.textContent;
+            document.getElementById('selectedBookId').value = item.getAttribute('data-value');
+            console.log('Selected Book ID:', document.getElementById('selectedBookId').value);  // Add this line
+        });
+    });
+});
+
+document.getElementById('borrowForm').addEventListener('submit', function(event) {
+    var memberId = document.getElementById('selectedMemberId').value;
+    var bookId = document.getElementById('selectedBookId').value;
+    document.getElementById('debugMemberId').textContent = memberId;
+    document.getElementById('debugBookId').textContent = bookId;
+    console.log('Form submitted with Member ID:', memberId, 'and Book ID:', bookId);
+});
+
