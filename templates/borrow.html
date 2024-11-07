@@ -63,7 +63,7 @@
             <div class="row mt-4">
                 <div class="col-12">
                     <h3>Trends</h3>
-                    <img id="borrowingPlot" src="{{ url_for('borrowing_plot') }}" alt="Borrowing Trends" class="img-fluid border border-white rounded" 
+                    <img id="borrowingPlot" src="{{ url_for('borrowing_plot') }}" style="padding:10px;background-color:#fff" alt="Borrowing Trends" class="img-fluid border border-white rounded" 
                     style="border-width: 5px; cursor: pointer;">
                 </div>
             </div>
@@ -82,8 +82,6 @@
                     </div>
                 </div>
             </div>
-            
-
     </div>
     
     
@@ -94,7 +92,7 @@
             <!-- Combined form with search, sort by, and order inputs in a single row -->
             <form method="GET" action="/borrowing" class="row g-3 align-items-end">
                 <!-- Search Bar -->
-                <div class="col-md-4">
+                <div class="col">
                     <label class="form-label" for="search-bar">Search by title:</label>
                     <div class="input-group">
                         <input type="text" id="search-bar" name="search" class="form-control rounded" placeholder="Search for books...">

@@ -31,9 +31,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     searchBar.addEventListener('input', function () {
         const searchQuery = searchBar.value.toLowerCase();
+        
         bookItems.forEach(book => {
             const title = book.querySelector('strong').textContent.toLowerCase();
-            if (title.includes(searchQuery)) {
+            const author = book.querySelector('.author').textContent.toLowerCase();
+            const publisher = book.querySelector('.publisher').textContent.toLowerCase();
+            const publicationYear = book.querySelector('.publication-year').textContent.toLowerCase();
+
+            if (
+                title.includes(searchQuery) ||
+                author.includes(searchQuery) ||
+                publisher.includes(searchQuery) ||
+                publicationYear.includes(searchQuery)
+            ) {
                 book.style.display = '';  // Show matching books
             } else {
                 book.style.display = 'none';  // Hide non-matching books
@@ -43,7 +53,42 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Form validation
+    // Add Book form validation
+    const form = document.querySelector('.add-form');
+    form.addEventListener('submit', function (event) {
+        const isbn = document.getElementById('isbn').value.trim();
+        const title = document.getElementById('title').value.trim();
+        const author = document.getElementById('author').value.trim();
+        const publisher = document.getElementById('publisher').value.trim();
+        const publicationYear = document.getElementById('publicationyear').value.trim();
+        const isbnRegex = /^\d{10}|\d{13}$/;  // ISBN must be either 10 or 13 digits
+
+        // Check if required fields are filled
+        if (!isbn || !title || !author || !publisher || !publicationYear) {
+            alert('Please fill out all required fields.');
+            event.preventDefault();  // Prevent form submission
+            return;
+        }
+
+        // Validate ISBN format
+        if (!isbnRegex.test(isbn)) {
+            alert('ISBN must be either 10 or 13 digits.');
+            event.preventDefault();
+            return;
+        }
+
+        // Validate publication year within the allowed range
+        const publicationYearNum = parseInt(publicationYear, 10);
+        if (publicationYearNum < 1000 || publicationYearNum > 2099) {
+            alert('Please select a valid publication year.');
+            event.preventDefault();
+            return;
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Member form validation
     const form = document.getElementById('add-member-form');
     form.addEventListener('submit', function (event) {
         const firstName = document.getElementById('firstname').value.trim();
@@ -62,8 +107,6 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();  // Stop form from submitting
             return;
         }
-
-        // Optionally, validate other form fields if needed
     });
     
 });
@@ -84,6 +127,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const checkboxes = document.querySelectorAll(".publisher-checkbox");
+    const filterForm = document.getElementById("filter-form");
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+            filterForm.submit();
+        });
+    });
+});
 
 function filterDropdown(inputId, optionClass) {
     var input, filter, ul, li, a, i;
@@ -130,4 +182,5 @@ document.getElementById('borrowForm').addEventListener('submit', function(event)
     document.getElementById('debugBookId').textContent = bookId;
     console.log('Form submitted with Member ID:', memberId, 'and Book ID:', bookId);
 });
+
 

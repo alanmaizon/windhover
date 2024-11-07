@@ -9,6 +9,11 @@
         <h2>Add a New Book</h2>
         <form action="/books" method="POST" enctype="multipart/form-data" class="add-form">
             <div class="mb-3">
+                <label for="isbn" class="form-label">ISBN:</label>
+                <input type="text" id="isbn" name="isbn" class="form-control" required pattern="\d{10}|\d{13}" title="ISBN must be 10 or 13 digits">
+            </div>
+
+            <div class="mb-3">
                 <label for="title" class="form-label">Title:</label>
                 <input type="text" id="title" name="title" class="form-control" required>
             </div>
@@ -19,18 +24,14 @@
             </div>
 
             <div class="mb-3">
-                <label for="genre" class="form-label">Genre:</label>
-                <select id="genre" name="genre" class="form-select" required>
-                    <option value="Fiction">Fiction</option>
-                    <option value="Non-fiction">Non-fiction</option>
-                    <!-- more genres -->
-                </select>
+                <label for="publisher" class="form-label">Publisher:</label>
+                <input type="text" id="publisher" name="publisher" class="form-control" required>
             </div>
 
             <div class="mb-3">
                 <label for="publicationyear" class="form-label">Publication Year:</label>
-                <select id="publicationyear" name="publicationyear" class="form-select" required>
-                    {% for year in range(1974, current_year + 1) %}
+                <select id="publicationyear" name="publicationyear" class="form-select" required min="1000" max="2099">
+                    {% for year in range(1924, current_year + 1) %}
                         <option value="{{ year }}">{{ year }}</option>
                     {% endfor %}
                 </select>
@@ -46,53 +47,53 @@
     </div>
     
     <div class="col-md-9">
-        <!-- Add a row to contain the two forms side by side -->
+        <!-- Row to contain the forms and filters -->
         <div class="row">
             <h2>Book List</h2>
+            
             <!-- Search Form -->
-            <div class="col-md-6">
-                <label class="form-label">Search by title:</label>
+            <div class="col-md-9">
                 <form id="search-form" class="mb-3">
                     <input type="text" id="search-bar" class="form-control" placeholder="Search for books...">
                 </form>
             </div>
-    
-            <!-- Sort Form -->
-            <div class="col-md-6">
-                <form method="GET" action="/books" class="mb-3 d-flex">
-                    <div class="me-2">
-                        <label for="sortby" class="form-label">Sort by:</label>
-                        <select name="sortby" id="sortby" class="form-select">
-                            <option value="title">Title</option>
-                            <!-- other options -->
-                        </select>
+            
+            <!-- Sort and Filter Form -->
+            <div class="col-md-3">
+                <form id="filter-form" method="GET" action="/books" class="mb-3 d-flex">
+                    <!-- Publisher Filter Dropdown -->
+                    <div class="dropdown me-6 flex-grow-1">
+                        <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Publishers
+                        </button>
+                        <ul class="dropdown-menu p-3" style="width:100px; max-height: 200px; overflow-y: auto;">
+                            {% for publisher in publishers %}
+                            <li class="form-check">
+                                <input type="checkbox" class="form-check-input publisher-checkbox" name="publishers" value="{{ publisher }}" id="publisher_{{ publisher }}" {% if publisher in selected_publishers %}checked{% endif %}>
+                                <label class="form-check-label" for="publisher_{{ publisher }}">{{ publisher }}</label>
+                            </li>
+                            {% endfor %}
+                        </ul>
                     </div>
-    
-                    <div class="me-2">
-                        <label for="order" class="form-label">Order:</label>
-                        <select name="order" id="order" class="form-select">
-                            <option value="asc">Ascending</option>
-                            <option value="desc">Descending</option>
-                        </select>
-                    </div>
-    
-                    <button type="submit" class="btn btn-secondary align-self-end">Sort</button>
                 </form>
             </div>
         </div>
     
         <div class="scroll-container" id="scroll-container">
-        <ul>
-            {% for book in books %}
-            <li>
-                <img src="{{ url_for('static', filename=book.imagepath) }}" alt="Cover image of {{ book.title }}"><br>
-                <strong>{{ book.title }}</strong><br>
-                by {{ book.author }}<br>
-                ({{ book.genre }}, {{ book.publicationyear }})
-            </li>
-            {% endfor %}
-        </ul>
+            <ul>
+                {% for book in books %}
+                <li>
+                    <img src="{{ url_for('static', filename=book.imagepath) }}" alt="Cover image of {{ book.title }}"><br>
+                    <strong>{{ book.title }}</strong><br>
+                    <span class="author">by {{ book.author }}</span><br>
+                    <span class="publisher">{{ book.publisher }}</span>, 
+                    <span class="publication-year">{{ book.publicationyear }}</span>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
+
+
 {% endblock %}
