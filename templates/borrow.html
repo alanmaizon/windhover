@@ -7,8 +7,11 @@
     <!-- Borrow Book Form (left side) -->
     <div class="col-md-3">
         <form method="POST" action="/borrowing" class="add-form">
+            <div id="loanHelp" class="form-text">
+                <p>IMPORTANT: <em>The standard loan period is one month, can only be renewed for seven days during the last week of borrowing.</em></p>
+            </div>
             <fieldset>
-                <legend>Borrow a book</legend>
+                <legend>Record transaction</legend>
                 <!-- Member Dropdown with Search -->
                 <div class="mb-3">
                     <label for="member-search" class="form-label">Member:</label>
@@ -57,7 +60,7 @@
 
                 <input type="hidden" name="memberid" id="selectedMemberId" required>
                 <input type="hidden" name="bookid" id="selectedBookId" required>
-                <button type="submit" class="btn btn-primary">Borrow Book</button>
+                <button type="submit" class="btn btn-primary">Lend Book</button>
             </fieldset>
         </form>
 
