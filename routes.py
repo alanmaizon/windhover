@@ -1,15 +1,20 @@
 import matplotlib
 matplotlib.use('Agg')
-from flask import render_template, request, redirect, url_for, flash, jsonify, send_file
+from flask import render_template, request, redirect, url_for, flash, send_file
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 from sqlalchemy import func
 import matplotlib.pyplot as plt
 import io
 import os
-from app import app, db
+from app import app
+from extensions import db
 from models import Book, Member, Borrowing
 from config import Config
+from filters import format_date
+
+# Load environmental filter for date format
+app.jinja_env.filters['format_date'] = format_date
 
 
 def allowed_file(filename):

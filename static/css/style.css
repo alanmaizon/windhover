@@ -17,6 +17,9 @@ body {
     color: var(--black);
 }
 
+.form-text {
+    color: rgb(207, 26, 26);
+}
 h1 {
     font-family: var(--paragraph-font-family);
     text-align: center;

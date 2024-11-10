@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from extensions import db
 from config import Config
 
 # Initialize the app
@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Initialize SQLAlchemy
-db = SQLAlchemy(app)
+db.init_app(app)
 
 # Import routes
 from routes import *

@@ -11,3 +11,9 @@ class Config:
     UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'static/images')
     MAX_CONTENT_LENGTH = int(os.getenv('MAX_CONTENT_LENGTH', 16 * 1024 * 1024))  # 16MB limit by default
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    
+class DevelopmentConfig(Config):
+    DEBUG = True
+
+class ProductionConfig(Config):
+    DEBUG = False

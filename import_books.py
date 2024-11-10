@@ -5,12 +5,13 @@ from app import app, db
 from models import Book
 import time
 from PIL import Image
+import re
 
 UPLOAD_FOLDER = 'static/images/book_covers'
 
 def download_image(image_url, title):
     """
-    Download an image from a URL and save it with the book title as filename.
+    Download an image from a URL and save it as JPEG with the book title as filename.
     Returns None if the image is not successfully downloaded or is invalid.
     """
     try:
@@ -31,12 +32,10 @@ def download_image(image_url, title):
         with open(image_path, 'wb') as f:
             f.write(response.content)
         
-        # Verify the image
+        # Verify the image and ensure it’s in JPEG format
         with Image.open(image_path) as img:
             width, height = img.size
-            
-            # Check if the image is too small or empty
-            if width < 10 or height < 10 or os.path.getsize(image_path) == 0:
+            if img.format != 'JPEG' or width < 10 or height < 10 or os.path.getsize(image_path) == 0:
                 os.remove(image_path)  # Remove the invalid image
                 return None
         
@@ -56,8 +55,17 @@ def import_books_from_csv(file_path):
     
     with app.app_context():
         for _, row in df.iterrows():
+            # Extract only numeric characters for ISBN
+            isbn = re.sub(r'\D', '', row['ISBN'])  # Keep only digits
+            
+            # Skip if ISBN is not a valid integer or empty
+            if not isbn.isdigit():
+                print(f"Invalid ISBN for '{row['Book-Title']}', skipping.")
+                books_skipped += 1
+                continue
+            
             # Check if the book already exists
-            existing_book = Book.query.filter_by(isbn=row['ISBN']).first()
+            existing_book = Book.query.filter_by(isbn=int(isbn)).first()
             
             if existing_book:
                 # Update the existing book if needed
@@ -83,7 +91,7 @@ def import_books_from_csv(file_path):
             
             # Create and add the book to the database
             book = Book(
-                isbn=row['ISBN'],
+                isbn=int(isbn),  # Store ISBN as integer
                 title=row['Book-Title'],
                 author=row['Book-Author'],
                 publicationyear=int(row['Year-Of-Publication']),

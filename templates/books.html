@@ -6,43 +6,47 @@
 <div class="row">
     <!-- Add Book Form (left side) -->
     <div class="col-md-3">
-        <h2>Add a New Book</h2>
         <form action="/books" method="POST" enctype="multipart/form-data" class="add-form">
-            <div class="mb-3">
-                <label for="isbn" class="form-label">ISBN:</label>
-                <input type="text" id="isbn" name="isbn" class="form-control" required pattern="\d{10}|\d{13}" title="ISBN must be 10 or 13 digits">
-            </div>
-
-            <div class="mb-3">
-                <label for="title" class="form-label">Title:</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="author" class="form-label">Author:</label>
-                <input type="text" id="author" name="author" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="publisher" class="form-label">Publisher:</label>
-                <input type="text" id="publisher" name="publisher" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="publicationyear" class="form-label">Publication Year:</label>
-                <select id="publicationyear" name="publicationyear" class="form-select" required min="1000" max="2099">
-                    {% for year in range(1924, current_year + 1) %}
-                        <option value="{{ year }}">{{ year }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="image" class="form-label">Book Cover Image:</label>
-                <input type="file" id="image" name="image" accept="image/*" class="form-control">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Add Book</button>
+            <fieldset>
+                <legend>Add a New Book</legend>
+        
+                <div class="mb-3">
+                    <label for="isbn" class="form-label">ISBN:</label>
+                    <input type="text" id="isbn" name="isbn" class="form-control" required pattern="\d{10}|\d{13}" title="ISBN must be 10 or 13 digits" aria-describedby="isbnHelp">
+                    <div id="isbnHelp" class="form-text">ISBN should be 10 or 13 digits long.</div>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" id="title" name="title" class="form-control" required aria-label="Book Title">
+                </div>
+        
+                <div class="mb-3">
+                    <label for="author" class="form-label">Author:</label>
+                    <input type="text" id="author" name="author" class="form-control" required aria-label="Author Name">
+                </div>
+        
+                <div class="mb-3">
+                    <label for="publisher" class="form-label">Publisher:</label>
+                    <input type="text" id="publisher" name="publisher" class="form-control" required aria-label="Publisher Name">
+                </div>
+        
+                <div class="mb-3">
+                    <label for="publicationyear" class="form-label">Publication Year:</label>
+                    <select id="publicationyear" name="publicationyear" class="form-select" required aria-label="Select Publication Year">
+                        {% for year in range(current_year, 1899, -1) %}
+                            <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="image" class="form-label">Book Cover Image:</label>
+                    <input type="file" id="image" name="image" accept="image/*" class="form-control" aria-label="Upload Book Cover Image">
+                </div>
+        
+                <button type="submit" class="btn btn-primary" aria-label="Add Book">Add Book</button>
+            </fieldset>
         </form>
     </div>
     
