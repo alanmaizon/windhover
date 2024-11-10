@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 db = SQLAlchemy()
-
-# You can now use the db object in other files by importing from extensions
+migrate = Migrate()

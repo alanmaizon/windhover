@@ -3,6 +3,8 @@
 **Overview**:  
 Create a simple web-based Library Management System where users can interact with different features of the library like books, authors, members, borrowing history, etc. This will involve Flask for the backend, Python for database queries, SQL for data storage, and HTML for the front end.
 
+Our goal is to provide data consistency between different routes and database operations handling errors and exceptions.
+
 ### **Key Features & Pages**:
 
 1. **Home Page**: 

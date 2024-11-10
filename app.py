@@ -1,16 +1,16 @@
 from flask import Flask
 from extensions import db
 from config import Config
+from blueprints.routes import route_bp
+from filters import format_date
 
-# Initialize the app
-app = Flask(__name__)
-app.config.from_object(Config)
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    db.init_app(app)
+    app.register_blueprint(route_bp)
 
-# Initialize SQLAlchemy
-db.init_app(app)
-
-# Import routes
-from routes import *
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    # Load environmental filter for date format
+    app.jinja_env.filters['format_date'] = format_date
+    
+    return app
