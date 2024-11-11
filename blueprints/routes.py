@@ -75,15 +75,16 @@ def books():
         sort_order = 'asc'
 
     # Build query with optional publisher filtering
-    query = Book.query
+    query = Book.query.filter(Book.deleted == False)
     if selected_publishers:
         query = query.filter(Book.publisher.in_(selected_publishers))
 
     books = query.order_by(db.text(f'{sort_by} {sort_order}')).all()
     current_year = datetime.now().year
 
-    # Retrieve distinct publishers for filter dropdown
-    publishers = [g[0] for g in db.session.query(Book.publisher).distinct()]
+    # Retrieve distinct publishers from non-deleted books
+    publishers = [g[0] for g in db.session.query(Book.publisher).filter(Book.deleted == False).distinct()]
+
 
     return render_template(
         'books.html',
@@ -94,6 +95,26 @@ def books():
         publishers=publishers,
         selected_publishers=selected_publishers
     )
+
+@route_bp.route('/books/edit_book/<int:bookid>', methods=['POST'])
+def edit_book(bookid):
+    book = Book.query.get_or_404(bookid)
+    book.title = request.form['title']
+    book.author = request.form['author']
+    book.publisher = request.form['publisher']
+    book.publicationyear = request.form['publicationyear']
+    db.session.commit()
+    flash("Book details updated successfully!", "success")
+    return redirect(url_for('route.books'))
+
+
+@route_bp.route('/books/delete_book/<int:bookid>', methods=['POST'])
+def delete_book(bookid):
+    book = Book.query.get_or_404(bookid)
+    book.deleted = True
+    db.session.commit()
+    flash("Book deleted successfully!", "success")
+    return redirect(url_for('route.books'))
 
 @route_bp.route('/members', methods=['GET', 'POST'])
 def members_page():

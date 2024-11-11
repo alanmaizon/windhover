@@ -10,6 +10,7 @@ class Book(db.Model):
     publicationyear = db.Column(db.Integer, nullable=False)
     imagepath = db.Column(db.String(255), nullable=True)
     available = db.Column(db.Boolean, default=True)
+    deleted = db.Column(db.Boolean, default=False)
 
 class Member(db.Model):
     __tablename__ = 'members'

@@ -183,4 +183,26 @@ document.getElementById('borrowForm').addEventListener('submit', function(event)
     console.log('Form submitted with Member ID:', memberId, 'and Book ID:', bookId);
 });
 
+function populateEditFormFromData(button) {
+    const bookid = button.dataset.bookid;
+    const title = button.dataset.title;
+    const author = button.dataset.author;
+    const publisher = button.dataset.publisher;
+    const publicationYear = button.dataset.publicationyear;
+
+    const form = document.getElementById('editBookForm');
+    form.action = `/books/edit_book/${bookid}`;
+
+    document.getElementById('editTitle').value = title;
+    document.getElementById('editAuthor').value = author;
+    document.getElementById('editPublisher').value = publisher;
+    document.getElementById('editPublicationYear').value = publicationYear;
+    document.getElementById('editBookModal').addEventListener('hide.bs.modal', function () {
+        document.getElementById('editBookForm').reset();
+    });
+}
+
+function setDeleteFormAction(bookid) {
+    document.getElementById('deleteBookForm').action = `/books/delete_book/${bookid}`;
+}
 
