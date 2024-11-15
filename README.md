@@ -106,9 +106,12 @@ erDiagram
 | **Dynamic Stats Display**       | Displayed stats for total books, members, and books borrowed on the homepage.                   | Added to homepage       | ✅ Completed          |
 | **Borrowing Rules**             | Established and displayed borrowing policies, such as loan period and renewal limits.           | Documented and applied  | ✅ Completed          |
 | **Icons Integration**           | Integrated icons from a JSON file, styled to adapt to light and dark modes.                     | Set up in templates     | ✅ Completed          |
+| **Blueprints**                  | Refactored routes using Flask blueprints for modularity and maintainability.                    | Fully implemented       | ✅ Completed          |
+| **Matplotlib Graphs**           | Added dynamic graphs to visualize borrowing trends, integrated into the app using Matplotlib.   | Integrated and tested   | ✅ Completed          |
+| **AWS RDS Setup**               | Configured and optimized Amazon RDS PostgreSQL database for reliable storage and backups.       | Setup complete          | ✅ Completed          |
+| **Cloud Render Deployment**     | Deployed the app on Render.com for production use, including environment variable setup.         | Successfully deployed   | ✅ Completed          |
 | **Testing & Debugging Setup**   | Documented testing practices, added error logging, and provided a debugging guide in README.    | Initial setup complete  | 🔄 Ongoing           |
 | **Future Enhancements**         | Noted potential enhancements like admin roles, extended book details, and member stats.         | Planning phase          | 🚧 Planned           |
-
 
 ## Resources
 
@@ -156,6 +159,3 @@ erDiagram
 
 - **[Font Awesome Icons](https://fontawesome.com/)**  
   Font Awesome provides a wide range of icons for web applications, supporting visual elements used in this project for icons in the footer, buttons, and other UI components.
-
-
-[def]: https://render.com/

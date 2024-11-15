@@ -105,6 +105,15 @@ header h1, header p {
 .image-container {
     position: relative;
     display: inline-block;
+    width: 150px; /* Set a fixed width for the image container */
+    margin: 0 auto; /* Center the container */
+}
+
+.details {
+    width: 100%; /* Match the width of the parent container */
+    max-width: 150px; /* Match the width of the .image-container */
+    margin: 0 auto; /* Center-align the details */
+    word-wrap: break-word; /* Ensure long text wraps */
 }
 
 .button-container {

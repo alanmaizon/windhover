@@ -92,9 +92,9 @@
                         <img src="{{ url_for('static', filename=book.imagepath) }}" alt="Cover image of {{ book.title }}">
                         
                         <!-- Edit and Delete Buttons -->
-                        <div class="button-container">
+                        <div class="button-container mt-2">
                             <button 
-                                class="edit-button" 
+                                class="btn btn-outline-primary btn-sm" 
                                 data-bookid="{{ book.bookid }}" 
                                 data-title="{{ book.title | e }}" 
                                 data-author="{{ book.author | e }}" 
@@ -105,16 +105,18 @@
                                 onclick="populateEditFormFromData(this)">
                                 Edit
                             </button>
-                            <button class="delete-button" onclick="setDeleteFormAction({{ book.bookid }})" data-bs-toggle="modal" data-bs-target="#deleteBookModal">
+                            <button class="btn btn-outline-danger btn-sm" onclick="setDeleteFormAction({{ book.bookid }})" data-bs-toggle="modal" data-bs-target="#deleteBookModal">
                                 Delete
                             </button>
                         </div>
                     </div>
+                    <div class="details">
                     <br>
                     <span class="title"><strong>{{ book.title }}</strong></span><br>
                     <span class="author">by {{ book.author }}</span><br>
                     <span class="publisher">{{ book.publisher }}</span>,
                     <span class="publication-year">{{ book.publicationyear }}</span>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
