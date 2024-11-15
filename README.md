@@ -6,19 +6,28 @@ Welcome to the **Windhover Library Management System**, a web application where 
 
 ## Table of Contents
 
+- [User Stories](#user-stories)
+- [Entity-Relationship Diagram](#entity-relationship-diagram)
 - [Features](#features)
-- [Technologies](#technologies)
-- [Setup](#setup)
-- [Usage](#usage)
-- [Screenshots](#screenshots)
+- [Resources](#resources)
 
 
-### **Entity-Relationship Diagram (ERD)**:
+## User Stories
+
+1. **As a librarian**, I want to view a list of available books, so I can see what’s in the library.
+2. **As a librarian**, I want to add a new book to the library, so I can keep the catalog updated.
+3. **As a librarian**, I want to see a list of members, so I can know who is registered with the library.
+4. **As a librarian**, I want to register a new member, so I can add them to the system.
+5. **As a librarian**, I want to record when a member borrows a book, so I can keep track of the borrowing history.
+6. **As a librarian**, I want to record when a member returns a book, so I can update the status in the system.
+7. **As a librarian**, I want to view the borrowing history, so I can see which members have borrowed and returned books.
+
+## Entity-Relationship Diagram:
 The project can have three core tables:
 - **Books**: 
-  - `BookID`, `Title`, `Author`, `Genre`, `PublicationYear`, `ImagePath`
+  - `BookID`, `ISBN`, `Title`, `Author`, `Publisher`, `PublicationYear`, `ImagePath`, `Available`, `Deleted`
 - **Members**: 
-  - `MemberID`, `Name`, `Email`, `MembershipStartDate`
+  - `MemberID`, `Name`, `Email`, `JoinDate`, `ProfilePicture`
 - **BorrowingHistory**: 
   - `TransactionID`, `BookID` (foreign key), `MemberID` (foreign key), `BorrowDate`, `ReturnDate`
 
@@ -29,7 +38,7 @@ erDiagram
         int ISBN
         string Title
         string Author
-        string Genre
+        string Publisher
         int PublicationYear
         string ImagePath
         boolean Available
@@ -58,37 +67,11 @@ erDiagram
 
 ## Features
 
-- Browse and search books by title, genre, author, etc.
+- Browse and search books by title, publisher, author, etc.
 - Add, edit, and delete book entries.
 - Manage members: add new members, search by name, display and edit member details.
 - Track book borrowing history with due dates, borrowing dates, and return tracking.
 - Sort data dynamically using search bars and dropdown options.
-
-## Technologies and Resources
-
-- **Flask**: Python web framework
-- **PostgreSQL**: Database for storing books, members, and borrowing records
-- **HTML/CSS/JavaScript**: Frontend of the app
-- **Bootstrap**: Styling framework for responsive design
-- **Psycopg2**: PostgreSQL database adapter for Python
-- **SQLAlchemy**: ORM that provides more security and abstraction
-- **Werkzeug**: Utility library used for secure file handling
-- **Flask-Migrations**: To track and apply incremental changes to the database
-- **Blueprints**: Helps organize the app into modular components
-- **RDS Amazon AWS**: Database setup, storage, backups, and updates
-
-## Setup
-
-Our goal is to provide data consistency between different routes and database operations handling errors and exceptions.
-
-### Prerequisites
-
-Ensure you have the following installed:
-
-- **Python 3.7+**
-- **PostgreSQL**
-
-## Usage
 
 ### Book Management
 
@@ -108,6 +91,63 @@ Ensure you have the following installed:
 - View history of borrowed books with due and return dates.
 - See live trends and stats.
 
-## Screenshots
+| **Feature**                     | **Description**                                                                                  | **Progress**           | **Status**           |
+|---------------------------------|--------------------------------------------------------------------------------------------------|-------------------------|-----------------------|
+| **Database Design**             | Initial database setup with tables for books, members, and borrowing records.                    | Designed and configured | ✅ Completed          |
+| **ISBN as Primary Key**         | Experimented with using ISBN as the primary key, encountered issues with data constraints.      | Reverted to `book_id`   | 🔄 Revised           |
+| **Data Import Script**          | Developed script to import books from CSV, including validation of ISBN and image handling.     | Adjusted and improved   | ✅ Completed          |
+| **Search Functionality**        | Implemented front-end JavaScript and SQL query search for books by title, author, and publisher.| Tested and enhanced     | ✅ Completed          |
+| **Frontend Design**             | Styled with Bootstrap, ensuring responsiveness and accessibility; implemented dark mode toggle. | Further enhancements    | 🔄 Ongoing           |
+| **Forms and Validation**        | Created and validated forms for adding books, members, and managing loans.                      | JavaScript and backend  | ✅ Completed          |
+| **Flask-Migrate Setup**         | Configured Flask-Migrate for database schema migrations and updates.                            | Set up and tested       | ✅ Completed          |
+| **Pagination**                  | Integrated pagination for books and members lists in the UI.                                    | Implemented in routes   | ✅ Completed          |
+| **Dynamic Stats Display**       | Displayed stats for total books, members, and books borrowed on the homepage.                   | Added to homepage       | ✅ Completed          |
+| **Borrowing Rules**             | Established and displayed borrowing policies, such as loan period and renewal limits.           | Documented and applied  | ✅ Completed          |
+| **Icons Integration**           | Integrated icons from a JSON file, styled to adapt to light and dark modes.                     | Set up in templates     | ✅ Completed          |
+| **Testing & Debugging Setup**   | Documented testing practices, added error logging, and provided a debugging guide in README.    | Initial setup complete  | 🔄 Ongoing           |
+| **Future Enhancements**         | Noted potential enhancements like admin roles, extended book details, and member stats.         | Planning phase          | 🚧 Planned           |
 
-![Home](static/images/screenshots/home.png)
+
+## Resources
+
+- **[edX CS50's Introduction to Databases with SQL](https://cs50.harvard.edu/sql/)**  
+  Harvard's CS50 course on edX provides a comprehensive introduction to databases. Course begins with SQLite for portability’s sake and ends with introductions to PostgreSQL and MySQL for scalability’s sake as well. 
+
+### Technical Documentation and Tools
+
+- **[Flask Documentation](https://flask.palletsprojects.com/)**  
+  Official documentation for Flask, a Python web framework used in this project for routing, handling requests, and rendering templates.
+
+- **[PostgreSQL Documentation](https://www.postgresql.org/docs/)**  
+  Comprehensive documentation on PostgreSQL, covering database setup, SQL syntax, and database management practices used in the project.
+
+- **[Bootstrap Documentation](https://getbootstrap.com/docs/)**  
+  Bootstrap’s official guide provides resources for responsive design, component usage, and advanced styling, enabling the project to achieve a polished and mobile-friendly frontend.
+
+- **[SQLAlchemy Documentation](https://docs.sqlalchemy.org/)**  
+  SQLAlchemy’s ORM (Object Relational Mapper) documentation provides insight into database abstraction techniques, making it easier to interact with PostgreSQL within the project’s Flask application.
+
+- **[AWS RDS Documentation](https://docs.aws.amazon.com/rds/)**  
+  Amazon’s RDS documentation for managing PostgreSQL instances on AWS, covering database setup, maintenance, and security.
+
+- **[Psycopg2 Documentation](https://www.psycopg.org/docs/)**  
+  Psycopg2 is a PostgreSQL database adapter for Python, crucial for handling database transactions within Flask applications.
+
+### Debugging and Testing Resources
+
+- **[Flask-Testing Documentation](https://flask.palletsprojects.com/)**  
+  Guides and best practices for setting up unit tests and handling error logging in Flask applications, supporting a reliable development process.
+
+- **[Chrome DevTools](https://developer.chrome.com/docs/devtools/)**  
+  Chrome DevTools is a set of web developer tools built into Google Chrome. Useful for debugging frontend code, inspecting elements, and tracking network activity.
+
+- **[Postman](https://www.postman.com/)**  
+  A platform for API testing, ideal for verifying the responses of routes and endpoints in the Flask application.
+
+### Design and Accessibility
+
+- **[WCAG (Web Content Accessibility Guidelines)](https://www.w3.org/WAI/WCAG21/quickref/)**  
+  Standards and practices for ensuring accessibility, crucial for improving the user experience for people with disabilities.
+
+- **[Font Awesome Icons](https://fontawesome.com/)**  
+  Font Awesome provides a wide range of icons for web applications, supporting visual elements used in this project for icons in the footer, buttons, and other UI components.

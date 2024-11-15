@@ -12,6 +12,7 @@ from models import Book, Member, Borrowing
 from config import Config
 from icons import load_icons
 
+icons = load_icons()
 route_bp = Blueprint('route', __name__)
 
 def allowed_file(filename):
@@ -23,7 +24,7 @@ def home():
     total_books = db.session.query(Book).count()
     total_members = db.session.query(Member).count()
     total_borrowed = db.session.query(Borrowing).count()
-    icons = load_icons()
+    
 
     # Pass the totals to the template
     return render_template(
@@ -96,7 +97,8 @@ def books():
         sort_by=sort_by,
         sort_order=sort_order,
         publishers=publishers,
-        selected_publishers=selected_publishers
+        selected_publishers=selected_publishers, 
+        icons=icons
     )
 
 @route_bp.route('/books/edit_book/<int:bookid>', methods=['POST'])
@@ -174,7 +176,8 @@ def members_page():
         sort_order=sort_order,
         search_query=search_query,
         page=page,
-        total_pages=members_pagination.pages
+        total_pages=members_pagination.pages,
+        icons=icons
     )
 
 
@@ -269,7 +272,8 @@ def manage_borrowing():
         page=page,
         total_pages=borrowing_records.pages,
         datetime=datetime,
-        search_query=search_query
+        search_query=search_query,
+        icons=icons
     )
 
 def get_borrowing_data():
