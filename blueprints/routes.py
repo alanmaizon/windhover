@@ -27,7 +27,7 @@ def home():
 
     # Fetch recommended books (published from 2020 to the current year)
     current_year = datetime.now().year
-    recommended_books = Book.query.filter(Book.publicationyear >= 2020).order_by(Book.publicationyear.desc()).all()
+    recommended_books = Book.query.filter(Book.deleted == False).filter(Book.publicationyear >= 2020).order_by(Book.publicationyear.desc()).all()
     
 
     # Pass the totals to the template

@@ -8,8 +8,11 @@
 <header class="bg-primary text-white text-center py-5 header-bg">
     <div class="container">
         <h1>Welcome to the Windhover</h1>
-        <p class="lead">Find your favorite books, join our lecture club, and more!</p>
-        <a href="{{ url_for('route.books') }}" class="btn btn-light btn-lg mt-3">Explore Now</a>
+        <p class="lead" id="dark-mode-status">Dark mode: off</p>
+        <div class="col-auto">
+            <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle Dark Mode" type="button">
+            <span class="toggle"></span>
+        </div>
     </div>
 </header>
 

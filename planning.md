@@ -1,4 +1,4 @@
-### **Roadmap**
+### **Planning**
 
 #### **1. Project Setup (Day 1-2)**  
 - Set up a virtual environment and Flask.
@@ -9,10 +9,7 @@
   - `static/` (for CSS/JS)
   
 #### **2. Database Design and Integration (Day 3-4)**
-- Create the SQL database:
-  - **Books Table**: `BookID`, `Title`, `Author`, `Genre`, `PublicationYear`, `ImagePath`
-  - **Members Table**: `MemberID`, `Name`, `Email`, `MembershipStartDate`
-  - **BorrowingHistory Table**: `TransactionID`, `BookID`, `MemberID`, `BorrowDate`, `ReturnDate`
+- Create the SQL database.
 - Set up the database connection in Flask using SQLAlchemy.
 - Define Python classes for ORM models.
 

@@ -48,8 +48,6 @@ nav {
 
 .header-bg {
     background-image: url('/static/images/hero.gif'); /* Path to your image */
-    background-size: cover; /* Ensure the image covers the entire header */
-    background-attachment: fixed; /* Keep the background fixed when scrolling */
     border-radius: 15px;
 }
 

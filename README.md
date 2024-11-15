@@ -7,14 +7,14 @@ Welcome to the **Windhover Library Management System**, a web application where 
 ## Table of Contents
 
 - [User Stories](#user-stories)
-- [Entity-Relationship Diagram](#entity-relationship-diagram)
+- [ER Diagram](#er-diagram)
 - [Features](#features)
 - [Resources](#resources)
 
 
 ## User Stories
 
-1. **As a librarian**, I want to view a list of available books, so I can see what’s in the library.
+1. **As a librarian**, I want to view a list of all books, so I can see what’s in the library.
 2. **As a librarian**, I want to add a new book to the library, so I can keep the catalog updated.
 3. **As a librarian**, I want to see a list of members, so I can know who is registered with the library.
 4. **As a librarian**, I want to register a new member, so I can add them to the system.
@@ -22,7 +22,7 @@ Welcome to the **Windhover Library Management System**, a web application where 
 6. **As a librarian**, I want to record when a member returns a book, so I can update the status in the system.
 7. **As a librarian**, I want to view the borrowing history, so I can see which members have borrowed and returned books.
 
-## Entity-Relationship Diagram:
+## ER Diagram:
 The project can have three core tables:
 - **Books**: 
   - `BookID`, `ISBN`, `Title`, `Author`, `Publisher`, `PublicationYear`, `ImagePath`, `Available`, `Deleted`
@@ -67,11 +67,24 @@ erDiagram
 
 ## Features
 
-- Browse and search books by title, publisher, author, etc.
-- Add, edit, and delete book entries.
-- Manage members: add new members, search by name, display and edit member details.
-- Track book borrowing history with due dates, borrowing dates, and return tracking.
-- Sort data dynamically using search bars and dropdown options.
+The goal is to provide data consistency between different routes and database operations handling errors and exceptions.
+
+### **Key Features & Pages**:
+
+1. **Home Page**: 
+   - Brief introduction of the system, navigation links to the other pages, and general information.
+   
+2. **Books List**:
+   - Displays a list of all available books in the library with options to search, filter by author or category.
+   - HTML form to add new books (name, author, genre, publication year, cover).
+
+3. **Members List**:
+   - Displays a list of registered members (name, email, membership start date).
+   - HTML form to register a new member.
+
+4. **Borrowing History**:
+   - Shows the borrowing history (which member borrowed which book, when, and return status).
+   - HTML form to record new borrowing/returning transactions.
 
 ### Book Management
 

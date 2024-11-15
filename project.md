@@ -25,12 +25,9 @@ Our goal is to provide data consistency between different routes and database op
 
 ### **Entity-Relationship Diagram (ERD)**:
 The project can have three core tables:
-- **Books**: 
-  - `BookID`, `Title`, `Author`, `Genre`, `PublicationYear`, `ImagePath`
-- **Members**: 
-  - `MemberID`, `Name`, `Email`, `MembershipStartDate`
-- **BorrowingHistory**: 
-  - `TransactionID`, `BookID` (foreign key), `MemberID` (foreign key), `BorrowDate`, `ReturnDate`
+- **Books**
+- **Members**
+- **BorrowingHistory**
 
 ### **Database Integration**:
 - **Python (Flask)**: For handling database connections, queries, and routes to interact with the pages.

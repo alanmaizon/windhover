@@ -2,13 +2,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const body = document.querySelector('body');
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const logo = document.getElementById('logo');
+    const darkModeStatus = document.getElementById('dark-mode-status'); // New element for displaying status
+
+    // Function to update the dark mode status text
+    function updateDarkModeStatus() {
+        const isDarkMode = body.classList.contains('dark-mode');
+        darkModeStatus.textContent = `Dark mode: ${isDarkMode ? 'ON' : 'OFF'}`;
+    }
 
     // Check the dark mode preference in localStorage and apply it
     if (localStorage.getItem('dark-mode') === 'enabled') {
         body.classList.add('dark-mode');
         logo.src = 'static/images/logo_grey.png';  // Change to dark mode logo
     }
+    updateDarkModeStatus(); // Initial status update
 
+    // Event listener for the dark mode toggle
     darkModeToggle.addEventListener('click', function () {
         body.classList.toggle('dark-mode');
 
@@ -20,6 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
             logo.src = 'static/images/logo_white.png';  // Light mode logo
             localStorage.setItem('dark-mode', 'disabled');
         }
+
+        updateDarkModeStatus(); // Update the status after toggling
     });
 });
 

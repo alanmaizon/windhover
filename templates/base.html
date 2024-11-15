@@ -62,22 +62,19 @@
     <!-- Footer -->
     <footer class="container text-center">
         <div class="row justify-content-center align-items-center">
-            <div>
-                <p>&copy; 2024 Windhover. All Rights Reserved.</p>
-            </div>
-            <div class="col-auto"><button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle Dark Mode" type="button">
-                <span class="toggle"></span>
-            </div>
             <div class="col-auto">
                 <div class="icon-container">
                     {% for icon in icons %}
                         <div class="icon" title="{{ icon.name }}">
-                            <svg width="20" height="20" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px">
+                            <svg width="40" height="40" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px">
                                 <path d="{{ icon.path }}" fill="var(--icon-fill)">
                             </svg>
                         </div>
                     {% endfor %}
                 </div>
+            </div>
+            <div>
+                <p>&copy; 2024 Windhover. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
