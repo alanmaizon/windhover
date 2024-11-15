@@ -72,29 +72,23 @@ header h1, header p {
     padding: 0;
     margin: 0;
     list-style: none;
+
 }
 
 .scroll-container li {
-    margin-right: 20px;
+    margin: 20px;
+    white-space: wrap;
 }
 
 .scroll-container img {
-
-    padding: 0 20px 0 0;
     display: block;
     width: 150px;
     height: 200px;
     margin-top: 5px;
     user-drag: none;  /* Prevent images from being dragged */
     pointer-events: none;  /* Disable pointer events to avoid dragging */
-}
-
-.scroll-container {
-    display: flex;
-    gap: 20px;
-    padding: 10px;
-    overflow-x: hidden;
-    scroll-behavior: smooth;  /* Enable smooth scrolling */
+    border-radius: 8px;
+    
 }
 
 .btn-circle {
@@ -117,7 +111,6 @@ header h1, header p {
     position: absolute;
     top: 50%;
     left: 50%;
-    padding-right: 18px;
     transform: translate(-50%, -50%);
     display: flex;
     gap: 10px; /* Space between buttons */

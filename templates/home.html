@@ -13,6 +13,23 @@
     </div>
 </header>
 
+<!-- Recommended Books Section -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Recommended Books</h2>
+    <div class="scroll-container" id="scroll-container">
+        <ul class="d-flex list-unstyled">
+            {% for book in books %}
+            <li class="me-3">
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename=book.imagepath) }}" alt="Cover image of {{ book.title }}">
+                    <p class="text-center mt-2"><strong>{{ book.title }}</strong><br>{{ book.author }}</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
 <!-- Main Content -->
 <div class="container my-5">
     <div class="row">

@@ -113,7 +113,10 @@ erDiagram
 ## Resources
 
 - **[edX CS50's Introduction to Databases with SQL](https://cs50.harvard.edu/sql/)**  
-  Harvard's CS50 course on edX provides a comprehensive introduction to databases. Course begins with SQLite for portability’s sake and ends with introductions to PostgreSQL and MySQL for scalability’s sake as well. 
+  Harvard's CS50 course on edX provides a comprehensive introduction to databases. Course explains SQLite for portability and PostgreSQL and MySQL for scalability.
+
+- **[Cloud Application Platform (Render)](https://render.com/)**  
+  Render helps software teams ship products fast and at any scale, can host applications with hundreds of services, all with a relentless commitment to reliability and uptime.
 
 ### Technical Documentation and Tools
 
@@ -153,3 +156,6 @@ erDiagram
 
 - **[Font Awesome Icons](https://fontawesome.com/)**  
   Font Awesome provides a wide range of icons for web applications, supporting visual elements used in this project for icons in the footer, buttons, and other UI components.
+
+
+[def]: https://render.com/

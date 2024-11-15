@@ -2,7 +2,7 @@ import json
 
 def load_icons():
     # Load the JSON data from the file
-    with open('Brands.json', 'r') as file:
+    with open('static/json/Brands.json', 'r') as file:
         brands_data = json.load(file)
     
     # Extract relevant icon data

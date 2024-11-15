@@ -25,7 +25,7 @@ def download_image(image_url, title):
         response.raise_for_status()
         
         # Save the image as "title.jpg" (replace spaces for consistency)
-        filename = f"{title.replace(' ', '_')[:20]}.jpg"  # Limit filename length
+        filename = f"{title.replace(' ', '_')[:100]}.jpg"  # Limit filename length
         image_path = os.path.join(UPLOAD_FOLDER, filename).replace("\\", "/")
         
         # Ensure the directory exists
@@ -119,4 +119,4 @@ def import_books_from_csv(file_path):
 if __name__ == "__main__":
     # Ensure the app context is available
     with app.app_context():
-        import_books_from_csv('books.csv')
+        import_books_from_csv('static/csv/books.csv')

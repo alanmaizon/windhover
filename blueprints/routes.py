@@ -24,6 +24,10 @@ def home():
     total_books = db.session.query(Book).count()
     total_members = db.session.query(Member).count()
     total_borrowed = db.session.query(Borrowing).count()
+
+    # Fetch recommended books (published from 2020 to the current year)
+    current_year = datetime.now().year
+    recommended_books = Book.query.filter(Book.publicationyear >= 2020).order_by(Book.publicationyear.desc()).all()
     
 
     # Pass the totals to the template
@@ -32,7 +36,9 @@ def home():
         total_books=total_books, 
         total_members=total_members, 
         total_borrowed=total_borrowed,
-        icons=icons
+        icons=icons,
+        books=recommended_books,
+        current_year=current_year
     )
 
 @route_bp.route('/books', methods=['GET', 'POST'])
