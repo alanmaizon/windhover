@@ -4,12 +4,14 @@
 erDiagram
     BOOKS {
         int BookID PK
+        int ISBN
         string Title
         string Author
         string Genre
         int PublicationYear
         string ImagePath
         boolean Available
+        boolean Deleted
     }
 
     MEMBERS {
@@ -32,7 +34,7 @@ erDiagram
     MEMBERS ||--o{ BORROWING_HISTORY: borrows
 ```
 
-# ERD - Expanded BOOKS schema
+# ERD - Expanded BOOKS schema - From CS50 (SQL Lessons)
 
 ```mermaid
 erDiagram

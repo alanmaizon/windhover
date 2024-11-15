@@ -10,6 +10,7 @@ import os
 from extensions import db
 from models import Book, Member, Borrowing
 from config import Config
+from icons import load_icons
 
 route_bp = Blueprint('route', __name__)
 
@@ -22,13 +23,15 @@ def home():
     total_books = db.session.query(Book).count()
     total_members = db.session.query(Member).count()
     total_borrowed = db.session.query(Borrowing).count()
+    icons = load_icons()
 
     # Pass the totals to the template
     return render_template(
         'home.html', 
         total_books=total_books, 
         total_members=total_members, 
-        total_borrowed=total_borrowed
+        total_borrowed=total_borrowed,
+        icons=icons
     )
 
 @route_bp.route('/books', methods=['GET', 'POST'])

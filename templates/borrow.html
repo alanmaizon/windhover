@@ -67,9 +67,6 @@
                 <img id="borrowingPlot" src="{{ url_for('route.borrowing_plot') }}" style="padding:10px;background-color:#fff" alt="Borrowing Trends" class="img-fluid border border-white rounded" 
                 style="border-width: 5px; cursor: pointer;">
             </div>
-            <div id="loanHelp">
-                <p>IMPORTANT: <em>The standard loan period is one month, can only be renewed for more seven days during the last week of borrowing.</em></p>
-            </div>
         </div>
         
         <!-- Modal -->
@@ -101,7 +98,9 @@
                     <div class="input-group">
                         <input type="text" id="search-bar" name="search" class="form-control rounded" placeholder="Search for books...">
                         <button type="submit" class="btn btn-secondary rounded-circle ms-2" style="width: 40px; height: 40px;">
-                            <span class="icon-search"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="margin-bottom: 5px">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                            </svg>
                         </button>
                     </div>
                 </div>

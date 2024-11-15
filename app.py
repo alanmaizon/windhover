@@ -4,6 +4,7 @@ from config import Config
 from blueprints.routes import route_bp
 from filters import format_date
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)

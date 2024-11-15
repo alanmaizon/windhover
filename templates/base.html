@@ -71,13 +71,15 @@
                 <span class="toggle"></span>
             </div>
             <div class="col-auto">
-                <span class="icon-amazon"></span>
-            </div>
-            <div class="col-auto">
-                <span class="icon-github"></span>
-            </div>
-            <div class="col-auto">
-                <span class="icon-stackoverflow"></span>
+                <div class="icon-container">
+                    {% for icon in icons %}
+                        <div class="icon" title="{{ icon.name }}">
+                            <svg width="20" height="20" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px">
+                                <path d="{{ icon.path }}" fill="var(--icon-fill)">
+                            </svg>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </footer>
