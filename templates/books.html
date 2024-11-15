@@ -54,15 +54,8 @@
 
         <!-- Row to contain the forms and filters -->
         <div class="row">
-            <h2>Book List</h2>
-            
-            <!-- Search Form -->
-            <div class="col-md-9">
-                <form id="search-form" class="mb-3">
-                    <input type="text" id="search-bar" class="form-control" placeholder="Search for books...">
-                </form>
-            </div>
-            
+            <h2>Books</h2>
+                        
             <!-- Sort and Filter Form -->
             <div class="col-md-3">
                 <form id="filter-form" method="GET" action="/books" class="mb-3 d-flex">
@@ -80,6 +73,12 @@
                             {% endfor %}
                         </ul>
                     </div>
+                </form>
+            </div>
+            <!-- Search Form -->
+            <div class="col-md-9">
+                <form id="search-form" class="mb-3">
+                    <input type="text" id="search-bar" class="form-control" placeholder="Search for books...">
                 </form>
             </div>
         </div>

@@ -248,6 +248,10 @@ body.dark-mode .modal-footer {
     color: var(--grey) !important;
 }
 
+.modal-content {
+    border-radius: 8px;
+}
+
 .dark-mode-toggle {
     background-color: #666;
 }
