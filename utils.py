@@ -1,11 +1,14 @@
 import pandas as pd
 import os
 import requests
-from app import app, db
+from extensions import db
 from models import Book
 import time
 from PIL import Image
 import re
+from run import app
+
+# Data import script 
 
 UPLOAD_FOLDER = 'static/images/book_covers'
 
@@ -22,7 +25,7 @@ def download_image(image_url, title):
         response.raise_for_status()
         
         # Save the image as "title.jpg" (replace spaces for consistency)
-        filename = f"{title.replace(' ', '_')[:100]}.jpg"  # Limit filename length
+        filename = f"{title.replace(' ', '_')[:20]}.jpg"  # Limit filename length
         image_path = os.path.join(UPLOAD_FOLDER, filename).replace("\\", "/")
         
         # Ensure the directory exists
