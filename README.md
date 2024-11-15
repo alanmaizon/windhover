@@ -91,6 +91,8 @@ erDiagram
 - View history of borrowed books with due and return dates.
 - See live trends and stats.
 
+### Testing and Debugging
+
 | **Feature**                     | **Description**                                                                                  | **Progress**           | **Status**           |
 |---------------------------------|--------------------------------------------------------------------------------------------------|-------------------------|-----------------------|
 | **Database Design**             | Initial database setup with tables for books, members, and borrowing records.                    | Designed and configured | ✅ Completed          |
