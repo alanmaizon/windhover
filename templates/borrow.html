@@ -64,7 +64,7 @@
         <div class="row mt-4">
             <div class="col-12">
                 <h3>Trends</h3>
-                <img id="borrowingPlot" src="{{ url_for('route.borrowing_plot') }}" style="padding:10px;background-color:#fff" alt="Borrowing Trends" class="img-fluid border border-white rounded" 
+                <img id="borrowingPlot" src="{{ url_for('borrow_bp.borrowing_plot') }}" style="padding:10px;background-color:#fff" alt="Borrowing Trends" class="img-fluid border border-white rounded" 
                 style="border-width: 5px; cursor: pointer;">
             </div>
         </div>
@@ -211,7 +211,7 @@
 <script>
     function refreshPlot() {
         var plotImg = document.getElementById('borrowingPlot');
-        plotImg.src = "{{ url_for('route.borrowing_plot') }}?" + new Date().getTime();
+        plotImg.src = "{{ url_for('borrow_bp.borrowing_plot') }}?" + new Date().getTime();
     }
 
     // Refresh the plot every 60 seconds
@@ -225,7 +225,7 @@
 
     function refreshPlot() {
         var plotImg = document.getElementById('borrowingPlot');
-        var newSrc = "{{ url_for('route.borrowing_plot') }}?" + new Date().getTime();
+        var newSrc = "{{ url_for('borrow_bp.borrowing_plot') }}?" + new Date().getTime();
         plotImg.src = newSrc;
         document.getElementById('modalImage').src = newSrc;
     }

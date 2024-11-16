@@ -38,23 +38,23 @@
             <path d="M204.3 373.5 c0 -3.3 0.2 -4.5 0.4 -2.7 0.2 1.8 0.2 4.5 0 6 -0.2 1.5 -0.4 0 -0.4 -3.3z"/>
             </g>
         </svg>        
-        <a class="navbar-brand" href="{{ url_for('route.home') }}"><h1>Windhover</h1></a>
+        <a class="navbar-brand" href="{{ url_for('home_bp.home') }}"><h1>Windhover</h1></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto" align="right">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ url_for('route.home') }}">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('home_bp.home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('route.books') }}">Books</a>
+                    <a class="nav-link" href="{{ url_for('books_bp.books') }}">Books</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('route.members_page') }}">Members</a>
+                    <a class="nav-link" href="{{ url_for('members_bp.members_page') }}">Members</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('route.manage_borrowing') }}">Borrowing</a>
+                    <a class="nav-link" href="{{ url_for('borrow_bp.manage_borrowing') }}">Borrowing</a>
                 </li>
             </ul>
         </div>

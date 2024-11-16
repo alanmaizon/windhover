@@ -85,17 +85,17 @@
         <div class="col-lg-4">
             <h2>Books</h2>
             <p>Add and check books available for borrowing. Search by title, author, publisher and year.</p>
-            <a href="{{ url_for('route.books') }}" class="btn btn-primary">View Books</a>
+            <a href="{{ url_for('books_bp.books') }}" class="btn btn-primary">View Books</a>
         </div>
         <div class="col-lg-4">
             <h2>Members</h2>
             <p>Manage membership, add new members, and access your members information.</p>
-            <a href="{{ url_for('route.members_page') }}" class="btn btn-primary">View Members</a>
+            <a href="{{ url_for('members_bp.members_page') }}" class="btn btn-primary">View Members</a>
         </div>
         <div class="col-lg-4">
             <h2>Borrowing</h2>
             <p>The standard loan period is one month. Loans may be renewed for an additional seven days.</p>
-            <a href="{{ url_for('route.manage_borrowing') }}" class="btn btn-primary">View Records</a>
+            <a href="{{ url_for('borrow_bp.manage_borrowing') }}" class="btn btn-primary">View Records</a>
         </div>
     </div>
 </div>

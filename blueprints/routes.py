@@ -105,8 +105,7 @@ def books():
         sort_by=sort_by,
         sort_order=sort_order,
         publishers=publishers,
-        selected_publishers=selected_publishers, 
-        icons=icons
+        selected_publishers=selected_publishers
     )
 
 @route_bp.route('/books/edit_book/<int:bookid>', methods=['POST'])
@@ -184,8 +183,7 @@ def members_page():
         sort_order=sort_order,
         search_query=search_query,
         page=page,
-        total_pages=members_pagination.pages,
-        icons=icons
+        total_pages=members_pagination.pages
     )
 
 
@@ -280,8 +278,7 @@ def manage_borrowing():
         page=page,
         total_pages=borrowing_records.pages,
         datetime=datetime,
-        search_query=search_query,
-        icons=icons
+        search_query=search_query
     )
 
 def get_borrowing_data():
@@ -321,7 +318,6 @@ def borrowing_plot():
     plt.close()
 
     return send_file(img, mimetype='image/png')
-
 
 @route_bp.route('/return_book/<int:borrowid>', methods=['POST'])
 def return_book(borrowid):
