@@ -92,9 +92,11 @@ def books():
     books = query.order_by(db.text(f'{sort_by} {sort_order}')).all()
     current_year = datetime.now().year
 
-    # Retrieve distinct publishers from non-deleted books
+    # Retrieve publishers from the database
     publishers = [g[0] for g in db.session.query(Book.publisher).filter(Book.deleted == False).distinct()]
-
+    
+    # Sort publishers alphabetically
+    publishers.sort()
 
     return render_template(
         'books.html',
@@ -203,7 +205,7 @@ def edit_member():
 
     return redirect(url_for('route.members_page'))
 
-
+# Break into smaller functions IMPORTANT!
 @route_bp.route('/borrowing', methods=['GET', 'POST'])
 def manage_borrowing():
     thirty_days_loan = 30

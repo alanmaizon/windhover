@@ -2,17 +2,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const body = document.querySelector('body');
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const darkModeStatus = document.getElementById('dark-mode-status'); // New element for displaying status
-    const svgGroup = document.querySelector('svg g'); // Target the <g> element in the SVG, if available
+    const svgGroups = document.querySelectorAll('svg g'); // Select all <g> elements in SVGs
 
-    // Function to update the SVG fill color
+    // Function to update the fill color for all SVG <g> elements
     function updateSvgFill() {
-        if (svgGroup) {
+        svgGroups.forEach(svgGroup => {
             if (body.classList.contains('dark-mode')) {
                 svgGroup.setAttribute('fill', '#ffffff'); // White fill for dark mode
             } else {
                 svgGroup.setAttribute('fill', '#000000'); // Black fill for light mode
             }
-        }
+        });
     }
 
     // Function to update the dark mode status text
