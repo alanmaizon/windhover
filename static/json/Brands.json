@@ -13,7 +13,7 @@
     "licenseURL": "https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md",
     "iconsHash": 168308518
   },
-  "height": 1024,
+  "height": 24,
   "prevSize": 32,
   "icons": [
 
@@ -68,8 +68,7 @@
       "isMulticolor2": false,
       "tags": [
         "Kaggle"
-      ],
-      "grid": 0
+      ]
     },
     {
       "paths": [
@@ -79,8 +78,7 @@
 
       "tags": [
         "GitHub"
-      ],
-      "grid": 0
+      ]
     }
   ],
   "preferences": {
