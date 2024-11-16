@@ -33,6 +33,52 @@
     </div>
 </div>
 
+<div class="container my-5">
+    <div class="row text-center">
+        
+        <!-- Total Books -->
+        <div class="col-md-4">
+            <svg width="100" height="100" fill="currentColor" class="mb-2">
+                <use xlink:href="#icon-bookmark"></use>
+            </svg>
+            <h2>{{ total_books }}</h2>
+            <p>Registered Books</p>
+        </div>   
+
+        <!-- Total Members -->
+        <div class="col-md-4">
+            <svg width="100" height="100" fill="currentColor" class="mb-2">
+                <use xlink:href="#icon-user"></use>
+            </svg>
+            <h2>{{ total_members }}</h2>
+            <p>Total Members</p>
+        </div>
+
+        <!-- Total Books Borrowed -->
+        <div class="col-md-4">
+            <svg width="100" height="100" fill="currentColor" class="mb-2">
+                <use xlink:href="#icon-checkmark"></use>
+            </svg>
+            <h2>{{ total_borrowed }}</h2>
+            <p>Books Borrowed</p>
+        </div>
+    
+    </div>
+</div>
+
+<!-- SVG Icons Definition -->
+<svg style="display: none;">
+    <symbol id="icon-bookmark" viewBox="0 0 24 24">
+        <path d="M5 3v18l7-4 7 4V3H5z"></path>
+    </symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24">
+        <path d="M12 2a7 7 0 0 1 7 7 7 7 0 1 1-14 0 7 7 0 0 1 7-7zm0 12c-4 0-8 2-8 6v2h16v-2c0-4-4-6-8-6z"></path>
+    </symbol>
+    <symbol id="icon-checkmark" viewBox="0 0 24 24">
+        <path d="M9 16.2l-3.5-3.5L4 14l5 5 12-12-1.5-1.5z"></path>
+    </symbol>
+</svg>
+
 <!-- Main Content -->
 <div class="container my-5">
     <div class="row">
@@ -74,51 +120,7 @@
 </div>
 
 
-<div class="container my-5">
-    <div class="row text-center">
-        
-        <!-- Total Books -->
-        <div class="col-md-4">
-            <svg width="48" height="48" fill="currentColor" class="mb-2">
-                <use xlink:href="#icon-bookmark"></use>
-            </svg>
-            <h2>{{ total_books }}</h2>
-            <p>Registered Books</p>
-        </div>   
 
-        <!-- Total Members -->
-        <div class="col-md-4">
-            <svg width="48" height="48" fill="currentColor" class="mb-2">
-                <use xlink:href="#icon-user"></use>
-            </svg>
-            <h2>{{ total_members }}</h2>
-            <p>Total Members</p>
-        </div>
-
-        <!-- Total Books Borrowed -->
-        <div class="col-md-4">
-            <svg width="48" height="48" fill="currentColor" class="mb-2">
-                <use xlink:href="#icon-checkmark"></use>
-            </svg>
-            <h2>{{ total_borrowed }}</h2>
-            <p>Books Borrowed</p>
-        </div>
-    
-    </div>
-</div>
-
-<!-- SVG Icons Definition -->
-<svg style="display: none;">
-    <symbol id="icon-bookmark" viewBox="0 0 24 24">
-        <path d="M5 3v18l7-4 7 4V3H5z"></path>
-    </symbol>
-    <symbol id="icon-user" viewBox="0 0 24 24">
-        <path d="M12 2a7 7 0 0 1 7 7 7 7 0 1 1-14 0 7 7 0 0 1 7-7zm0 12c-4 0-8 2-8 6v2h16v-2c0-4-4-6-8-6z"></path>
-    </symbol>
-    <symbol id="icon-checkmark" viewBox="0 0 24 24">
-        <path d="M9 16.2l-3.5-3.5L4 14l5 5 12-12-1.5-1.5z"></path>
-    </symbol>
-</svg>
 
 
 {% endblock %}
