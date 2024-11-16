@@ -1,36 +1,49 @@
 document.addEventListener("DOMContentLoaded", function () {
     const body = document.querySelector('body');
     const darkModeToggle = document.getElementById('dark-mode-toggle');
-    const logo = document.getElementById('logo');
     const darkModeStatus = document.getElementById('dark-mode-status'); // New element for displaying status
+    const svgGroup = document.querySelector('svg g'); // Target the <g> element in the SVG, if available
+
+    // Function to update the SVG fill color
+    function updateSvgFill() {
+        if (svgGroup) {
+            if (body.classList.contains('dark-mode')) {
+                svgGroup.setAttribute('fill', '#ffffff'); // White fill for dark mode
+            } else {
+                svgGroup.setAttribute('fill', '#000000'); // Black fill for light mode
+            }
+        }
+    }
 
     // Function to update the dark mode status text
     function updateDarkModeStatus() {
         const isDarkMode = body.classList.contains('dark-mode');
-        darkModeStatus.textContent = `Dark mode: ${isDarkMode ? 'ON' : 'OFF'}`;
+        if (darkModeStatus) {
+            darkModeStatus.textContent = `Dark mode: ${isDarkMode ? 'ON' : 'OFF'}`;
+        }
     }
 
     // Check the dark mode preference in localStorage and apply it
     if (localStorage.getItem('dark-mode') === 'enabled') {
         body.classList.add('dark-mode');
-        logo.src = 'static/images/logo_grey.png';  // Change to dark mode logo
     }
+
     updateDarkModeStatus(); // Initial status update
+    updateSvgFill(); // Initial SVG fill update
 
     // Event listener for the dark mode toggle
     darkModeToggle.addEventListener('click', function () {
         body.classList.toggle('dark-mode');
 
-        // Update the logo and save dark mode preference
+        // Save the dark mode preference in localStorage
         if (body.classList.contains('dark-mode')) {
-            logo.src = 'static/images/logo_grey.png';  // Dark mode logo
             localStorage.setItem('dark-mode', 'enabled');
         } else {
-            logo.src = 'static/images/logo_white.png';  // Light mode logo
             localStorage.setItem('dark-mode', 'disabled');
         }
 
         updateDarkModeStatus(); // Update the status after toggling
+        updateSvgFill(); // Update the SVG fill color on toggle
     });
 });
 
