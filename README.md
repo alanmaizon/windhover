@@ -118,7 +118,7 @@ The goal is to provide data consistency between different routes and database op
 | **Pagination**                  | Integrated pagination for books and members lists in the UI.                                    | Implemented in routes   | ✅ Completed          |
 | **Dynamic Stats Display**       | Displayed stats for total books, members, and books borrowed on the homepage.                   | Added to homepage       | ✅ Completed          |
 | **Borrowing Rules**             | Established and displayed borrowing policies, such as loan period and renewal limits.           | Documented and applied  | ✅ Completed          |
-| **Icons Integration**           | Integrated icons from a JSON file, styled to adapt to light and dark modes.                     | Set up in templates     | ✅ Completed          |
+| **Icons Integration**           | Integrated icons from a python file, styled to adapt to light and dark modes.                     | Set up in templates     | ✅ Completed          |
 | **Blueprints**                  | Refactored routes using Flask blueprints for modularity and maintainability.                    | Fully implemented       | ✅ Completed          |
 | **Matplotlib Graphs**           | Added dynamic graphs to visualize borrowing trends, integrated into the app using Matplotlib.   | Integrated and tested   | ✅ Completed          |
 | **AWS RDS Setup**               | Configured and optimized Amazon RDS PostgreSQL database for reliable storage and backups.       | Setup complete          | ✅ Completed          |

@@ -1,16 +1,12 @@
 import matplotlib
 matplotlib.use('Agg')
-from flask import Blueprint, render_template, request, redirect, url_for, flash, send_file, current_app
-from werkzeug.utils import secure_filename
+from flask import Blueprint, render_template, request, redirect, url_for, flash, send_file
 from datetime import datetime, timedelta
 from sqlalchemy import func
 import matplotlib.pyplot as plt
 import io
-import os
 from extensions import db
 from models import Book, Member, Borrowing
-from config import Config
-from icons import load_icons
 
 borrow_bp = Blueprint('borrow_bp', __name__)
 

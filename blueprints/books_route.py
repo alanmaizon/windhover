@@ -1,16 +1,10 @@
-import matplotlib
-matplotlib.use('Agg')
-from flask import Blueprint, render_template, request, redirect, url_for, flash, send_file, current_app
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 from werkzeug.utils import secure_filename
-from datetime import datetime, timedelta
-from sqlalchemy import func
-import matplotlib.pyplot as plt
-import io
+from datetime import datetime
 import os
 from extensions import db
-from models import Book, Member, Borrowing
+from models import Book
 from config import Config
-from icons import load_icons
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in Config.ALLOWED_EXTENSIONS
