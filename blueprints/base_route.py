@@ -10,5 +10,4 @@ def inject_icons():
     Automatically inject icons into the base.html template context.
     
     """
-    print(SVG_PATHS)
     return {'ico': SVG_PATHS}  # Pass icons to all templates
