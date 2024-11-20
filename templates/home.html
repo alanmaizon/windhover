@@ -107,7 +107,7 @@
     <div class="icon-container">
         {% for name, icon in ico.items() %}
         <div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="{{ icon.viewBox }}" width="48" height="48">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="{{ icon.viewBox }}" width="32" height="32">
                 <g fill="{{ icon.fill }}">
                     <path d="{{ icon.path }}"></path>
                 </g>
@@ -115,9 +115,5 @@
         </div>
         {% endfor %}
     </div>
-
-
-
-
 
 {% endblock %}

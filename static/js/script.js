@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
     // Search functionality
     const searchBar = document.getElementById('search-bar');
@@ -230,3 +229,18 @@ function setDeleteFormAction(bookid) {
     document.getElementById('deleteBookForm').action = `/books/delete_book/${bookid}`;
 }
 
+function openEditModal(id, firstname, lastname, email, profilePicture) {
+    // Populate modal fields with the member's data
+    document.getElementById('memberid').value = id;
+    document.getElementById('firstname').value = firstname;
+    document.getElementById('lastname').value = lastname;
+    document.getElementById('email').value = email;
+    
+    // Set the profile picture
+    var profilePicElement = document.getElementById('modalProfilePicture');
+    profilePicElement.src = profilePicture ? profilePicture : '/static/default-profile.jpg';
+    
+    // Show the modal
+    var editMemberModal = new bootstrap.Modal(document.getElementById('editMemberModal'));
+    editMemberModal.show();
+}

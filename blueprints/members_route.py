@@ -49,7 +49,8 @@ def members_page():
     sort_order = request.args.get('order', 'asc')
     search_query = request.args.get('search', '')
     page = request.args.get('page', 1, type=int)
-    per_page = 6
+    per_page = 10  # Number of members per page
+    search_query = request.args.get('search', '')
 
     # Modify the members query with search, sort, and pagination
     members_query = Member.query.filter(
@@ -61,6 +62,7 @@ def members_page():
 
     return render_template(
         'members.html',
+        members_pagination=members_pagination,
         members=members_pagination.items,
         sort_by=sort_by,
         sort_order=sort_order,

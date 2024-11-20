@@ -80,72 +80,56 @@
         <br>
 
         <!-- Members List -->
-        <div class="row">
-            {% for member in members %}
-            <div class="col-md-6 mb-3">
-                <div class="d-flex align-items-start">
-                    <!-- Profile Picture Column -->
-                    <img src="{{ url_for('static', filename=member.profilepicture) }}" 
-                        alt="Profile picture of {{ member.firstname }}" 
-                        class="me-3 rounded-circle" width="80" height="80"
-                        style="cursor: pointer;"
-                        onclick="openEditModal('{{ member.memberid }}', '{{ member.firstname }}', '{{ member.lastname }}', '{{ member.email }}', '{{ url_for('static', filename=member.profilepicture) }}')">
-                    <div>
-                        <strong>{{ member.firstname }} {{ member.lastname }}</strong><br>
-                        Joined: {{ member.joindate | format_date }}<br>
-                        {{ member.email }}
+        <div id="scroll-container-members">
+            <ul class="row">
+                {% for member in members %}
+                <div class="col-md-6 mb-3">
+                    <div class="d-flex align-items-start">
+                        <!-- Profile Picture Column -->
+                        <img src="{{ url_for('static', filename=member.profilepicture) }}" 
+                            alt="Profile picture of {{ member.firstname }}" 
+                            class="me-3 rounded-circle" width="80" height="80"
+                            style="cursor: pointer;"
+                            onclick="openEditModal('{{ member.memberid }}', '{{ member.firstname }}', '{{ member.lastname }}', '{{ member.email }}', '{{ url_for('static', filename=member.profilepicture) }}')">
+                        <div>
+                            <strong>{{ member.firstname }} {{ member.lastname }}</strong><br>
+                            Joined: {{ member.joindate | format_date }}<br>
+                            {{ member.email }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+            </ul>
         </div>
 
-        <!-- Pagination -->
-        {% if total_pages > 1 %}
-        <nav aria-label="Page navigation" class="mt-3">
-            <ul class="pagination">
-                {% if page > 1 %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page - 1 }}&sortby={{ sort_by }}&order={{ sort_order }}&search={{ search_query }}">Previous</a>
-                </li>
-                {% endif %}
-                
-                <li class="page-item {% if page == 1 %}active{% endif %}">
-                    <a class="page-link" href="?page=1&sortby={{ sort_by }}&order={{ sort_order }}&search={{ search_query }}">1</a>
-                </li>
-                
-                {% if page > 3 %}
-                <li class="page-item disabled">
-                    <span class="page-link">...
-                </li>
-                {% endif %}
-                
-                {% if page != 1 and page != total_pages %}
-                <li class="page-item active">
-                    <span class="page-link">{{ page }}
-                </li>
-                {% endif %}
-                
-                {% if page < total_pages - 2 %}
-                <li class="page-item disabled">
-                    <span class="page-link">...
-                </li>
-                {% endif %}
-                
-                {% if total_pages > 1 %}
-                <li class="page-item {% if page == total_pages %}active{% endif %}">
-                    <a class="page-link" href="?page={{ total_pages }}&sortby={{ sort_by }}&order={{ sort_order }}&search={{ search_query }}">{{ total_pages }}</a>
-                </li>
-                {% endif %}
-                
-                {% if page < total_pages %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page + 1 }}&sortby={{ sort_by }}&order={{ sort_order }}&search={{ search_query }}">Next</a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-    {% endif %}    
+<!-- Pagination -->
+{% if members_pagination.pages > 1 %}
+<nav aria-label="Page navigation" class="mt-3">
+    <ul class="pagination">
+        {% if members_pagination.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('members_bp.members_page', page=members_pagination.prev_num, search=search_query) }}#scroll-container-members">Previous</a>
+        </li>
+        {% endif %}
+        
+        {% for p in members_pagination.iter_pages(left_edge=2, right_edge=2, left_current=2, right_current=2) %}
+        {% if p %}
+        <li class="page-item {% if p == members_pagination.page %}active{% endif %}">
+            <a class="page-link" href="{{ url_for('members_bp.members_page', page=p, search=search_query) }}#scroll-container-members">{{ p }}</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">...</span></li>
+        {% endif %}
+        {% endfor %}
+        
+        {% if members_pagination.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('members_bp.members_page', page=members_pagination.next_num, search=search_query) }}#scroll-container-members">Next</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
     </div>
 </div>
 
@@ -195,21 +179,7 @@
 
 
 <script>
-    function openEditModal(id, firstname, lastname, email, profilePicture) {
-        // Populate modal fields with the member's data
-        document.getElementById('memberid').value = id;
-        document.getElementById('firstname').value = firstname;
-        document.getElementById('lastname').value = lastname;
-        document.getElementById('email').value = email;
-        
-        // Set the profile picture
-        var profilePicElement = document.getElementById('modalProfilePicture');
-        profilePicElement.src = profilePicture ? profilePicture : '/static/default-profile.jpg';
-        
-        // Show the modal
-        var editMemberModal = new bootstrap.Modal(document.getElementById('editMemberModal'));
-        editMemberModal.show();
-    }    
+
 </script>
 
 {% endblock %}

@@ -56,35 +56,50 @@ def manage_borrowing():
 
     # GET request handling
     page = request.args.get('page', 1, type=int)
-    per_page = 5
+    per_page = 10
     sort_by = request.args.get('sortby', 'borrowdate')
     sort_order = request.args.get('order', 'desc')
     search_query = request.args.get('search', '').strip()
-
+    exclude_returned = request.args.get('exclude_returned', '0') == '1'
+    
+    # Build the borrowing records query
     borrowing_records_query = Borrowing.query.join(Book).filter(
         (Book.title.ilike(f'%{search_query}%')) | (search_query == '')
-    ).order_by(db.text(f'{sort_by} {sort_order}'))
+    )
 
-    borrowing_records = borrowing_records_query.paginate(page=page, per_page=per_page, error_out=False)
+    # Apply filter to exclude returned books
+    if exclude_returned:
+        borrowing_records_query = borrowing_records_query.filter(Borrowing.returndate.is_(None))
 
+    borrowing_records_query = borrowing_records_query.order_by(db.text(f'{sort_by} {sort_order}'))
+
+    # Paginate the results
+    borrow_pagination = borrowing_records_query.paginate(page=page, per_page=per_page, error_out=False)
+
+    # Get all members and available books
     members = Member.query.all()
     books = Book.query.filter_by(available=True).all()
-
+    
+    # Add the `can_extend` property for each borrowing record
     today = datetime.now().date()
-    for record in borrowing_records.items:
+    seven_days_deadline = 7  # Assuming this variable is defined
+    for record in borrow_pagination.items:
         record.can_extend = (record.duedate - today).days <= seven_days_deadline and not record.returndate
-
+    
+    # Render the template with pagination and other context variables
     return render_template(
         'borrow.html',
-        borrowing_records=borrowing_records.items,
+        borrowing_records=borrow_pagination.items,
+        borrow_pagination=borrow_pagination,
         members=members,
         books=books,
         sort_by=sort_by,
         sort_order=sort_order,
         page=page,
-        total_pages=borrowing_records.pages,
+        total_pages=borrow_pagination.pages,
         datetime=datetime,
-        search_query=search_query
+        search_query=search_query,
+        exclude_returned=exclude_returned
     )
 
 def get_borrowing_data():

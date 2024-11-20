@@ -6,7 +6,7 @@ from models import Book
 import time
 from PIL import Image
 import re
-from run import app
+from wsgi import app
 
 # Data import script 
 
