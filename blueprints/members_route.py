@@ -87,5 +87,3 @@ def edit_member():
         flash('Member not found.', 'error')
 
     return redirect(url_for('members_bp.members_page'))
-
-
