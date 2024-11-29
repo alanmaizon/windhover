@@ -162,9 +162,6 @@ The goal is to provide data consistency between different routes and database op
 - **[Chrome DevTools](https://developer.chrome.com/docs/devtools/)**  
   Chrome DevTools is a set of web developer tools built into Google Chrome. Useful for debugging frontend code, inspecting elements, and tracking network activity.
 
-- **[Postman](https://www.postman.com/)**  
-  A platform for API testing, ideal for verifying the responses of routes and endpoints in the Flask application.
-
 ### Design and Accessibility
 
 - **[WCAG (Web Content Accessibility Guidelines)](https://www.w3.org/WAI/WCAG21/quickref/)**  
