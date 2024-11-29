@@ -93,7 +93,7 @@
                         <!-- Edit and Delete Buttons -->
                         <div class="button-container mt-2">
                             <button 
-                                class="btn btn-outline-primary btn-sm" 
+                                class="btn btn-primary btn-sm" 
                                 data-bookid="{{ book.bookid }}" 
                                 data-title="{{ book.title | e }}" 
                                 data-author="{{ book.author | e }}" 
@@ -104,7 +104,11 @@
                                 onclick="populateEditFormFromData(this)">
                                 Edit
                             </button>
-                            <button class="btn btn-outline-danger btn-sm" onclick="setDeleteFormAction({{ book.bookid }})" data-bs-toggle="modal" data-bs-target="#deleteBookModal">
+                            <button 
+                                class="btn btn-danger btn-sm" 
+                                onclick="setDeleteFormAction({{ book.bookid }})" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deleteBookModal">
                                 Delete
                             </button>
                         </div>
