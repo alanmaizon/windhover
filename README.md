@@ -9,7 +9,7 @@ Welcome to the **Windhover Library Management System**, a web application where 
 - [User Stories](#user-stories)
 - [ER Diagram](#er-diagram)
 - [Features](#features)
-- [Test & Debug](#testing-and-debuging)
+- [Test & Debug](#testing-and-debugging)
 - [Resources](#resources)
 
 
