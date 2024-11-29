@@ -1,6 +1,6 @@
-# Module 4 - UCD PA - Alan Maizon
+# Windhover
 
-# Windhover Library Management System
+# Library Management System
 
 Welcome to the **Windhover Library Management System**, a web application where you can browse books, manage member information, and track borrowing history.
 
@@ -169,3 +169,7 @@ The goal is to provide data consistency between different routes and database op
 
 - **[Font Awesome Icons](https://fontawesome.com/)**  
   Font Awesome provides a wide range of icons for web applications, supporting visual elements used in this project for icons in the footer, buttons, and other UI components.
+
+---
+
+## Module 4 - UCD PA - Alan Maizon
