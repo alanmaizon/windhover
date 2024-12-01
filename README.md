@@ -1,6 +1,6 @@
 # Windhover
 
-![Background](static/images/screenshots/borrowing.png)
+![Screenshot Home Page](static/images/screenshot_0001.png)
 
 # Library Management System
 
