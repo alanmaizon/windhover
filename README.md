@@ -1,5 +1,13 @@
 # Windhover
-# Library Management System
+
+
+---
+
+## Library Management System
+
+Welcome to the **Windhover Library Management System**, a web application where you can browse books, manage member information, and track borrowing history. Link to deployed web service here **[Windhover (on Render)](https://windhover.onrender.com/)** 
+
+
 ---
 
 ## Screenshots
@@ -7,9 +15,6 @@
 ![Screenshot Home Page](static/images/screenshot_0002.png) ![Screenshot Home Page](static/images/screenshot_0004.png)  
 ![Screenshot Home Page](static/images/screenshot_0001.png) ![Screenshot Home Page](static/images/screenshot_0003.png)
 
-
-
-Welcome to the **Windhover Library Management System**, a web application where you can browse books, manage member information, and track borrowing history. Link to deployed web service here **[Windhover (on Render)](https://windhover.onrender.com/)** 
 
 ---
 
@@ -22,6 +27,8 @@ Welcome to the **Windhover Library Management System**, a web application where 
 - [Resources](#resources)
 
 
+---
+
 ## User Stories
 
 1. **As a librarian**, I want to view a list of all books, so I can see what’s in the library.
@@ -31,6 +38,9 @@ Welcome to the **Windhover Library Management System**, a web application where 
 5. **As a librarian**, I want to record when a member borrows a book, so I can keep track of the borrowing history.
 6. **As a librarian**, I want to record when a member returns a book, so I can update the status in the system.
 7. **As a librarian**, I want to view the borrowing history, so I can see which members have borrowed and returned books.
+
+
+---
 
 ## ER Diagram:
 The project can have three core tables:
@@ -74,6 +84,8 @@ erDiagram
     BOOKS ||--o{ BORROWING_HISTORY: contains
     MEMBERS ||--o{ BORROWING_HISTORY: borrows
 ```
+
+---
 
 ## Features
 
@@ -136,6 +148,9 @@ The goal is to provide data consistency between different routes and database op
 | **Testing & Debugging Setup**   | Documented testing practices, added error logging, and provided a debugging guide in README.    | Initial setup complete  | 🔄 Ongoing           |
 | **Future Enhancements**         | Noted potential enhancements like admin roles, extended book details, and member stats.         | Planning phase          | 🚧 Planned           |
 
+
+---
+
 ## Resources
 
 - **[edX CS50's Introduction to Databases with SQL](https://cs50.harvard.edu/sql/)**  
@@ -181,6 +196,7 @@ The goal is to provide data consistency between different routes and database op
   Font Awesome provides a wide range of icons for web applications, supporting visual elements used in this project for icons in the footer, buttons, and other UI components.
 
 ---
+
 
 ## Module 4 - UCD PA - Alan Maizon
 **[Github (Public Repository)](https://github.com/alanmaizon/windhover/)**
