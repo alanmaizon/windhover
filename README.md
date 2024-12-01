@@ -1,8 +1,10 @@
 # Windhover
-
-![Screenshot Home Page](static/images/screenshot_0001.png)
-
 # Library Management System
+
+![Screenshot Home Page](static/images/screenshot_0002.png)
+![Screenshot Home Page](static/images/screenshot_0004.png)
+
+
 
 Welcome to the **Windhover Library Management System**, a web application where you can browse books, manage member information, and track borrowing history. Link to deployed web service here **[Windhover (on Render)](https://windhover.onrender.com/)** 
 
