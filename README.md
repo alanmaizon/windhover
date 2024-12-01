@@ -1,5 +1,5 @@
 # Windhover
--  **Library Management System**
+**Library Management System**
 
 ![Screenshot Home Page](static/images/screenshot_0002.png) ![Screenshot Home Page](static/images/screenshot_0004.png)
 ![Screenshot Home Page](static/images/screenshot_0001.png) ![Screenshot Home Page](static/images/screenshot_0003.png)
