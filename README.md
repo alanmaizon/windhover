@@ -1,6 +1,6 @@
 # Windhover
 
-![Background](static/images/hero.gif)
+![Background](static/images/screenshots/borrowing.png)
 
 # Library Management System
 
